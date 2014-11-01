@@ -1,0 +1,18 @@
+{
+  "name": "promowifi",
+  "version": "0.0.1",
+  "authors": [
+    "limitium"
+  ],
+  "moduleType": [
+    "globals"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
