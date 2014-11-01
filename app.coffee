@@ -16,12 +16,14 @@ app = connect()
   .use("/add", (req, res, next) ->
     if "POST" is req.method
       id = new Date().getTime()
-      promos.list.push
-        id: id,
-        name: req.body.name
-        message: req.body.message
-        type: req.body.type
-      fs.writeFileSync('./promo.json', JSON.stringify(promos))
+      if req.body.name and req.body.message and req.body.type in ['sale','promo']
+        promos.list.push
+          id: id,
+          name: req.body.name.toLocaleLowerCase()
+          message: req.body.message
+          type: req.body.type.toLocaleLowerCase()
+        fs.writeFileSync('./promo.json', JSON.stringify(promos))
+
       res.end(id+'');
     else
       next()
@@ -37,7 +39,7 @@ app = connect()
   .use("/find", (req, res, next) ->
     name = unescape(req.url)
     if ('/' == name[0])
-      name = name.slice(1)
+      name = name.slice(1).toLocaleLowerCase()
     res.end(JSON.stringify(promos.list.filter (p) -> p.name == name));
   )
   .use((err, req, res, next) ->
