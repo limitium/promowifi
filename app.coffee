@@ -1,6 +1,7 @@
 http = require("http")
 connect = require("connect")
 fs = require("fs")
+url = require('url')
 
 promos = JSON.parse(fs.readFileSync('./promo.json', 'utf8'))
 
@@ -32,6 +33,12 @@ app = connect()
       res.end('true');
     else
       next()
+  )
+  .use("/find", (req, res, next) ->
+    name = unescape(req.url)
+    if ('/' == name[0])
+      name = name.slice(1)
+    res.end(JSON.stringify(promos.list.filter (p) -> p.name == name));
   )
   .use((err, req, res, next) ->
     res.statusCode = err.status  if err.status
