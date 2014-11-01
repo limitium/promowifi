@@ -1,27 +1,35 @@
 http = require("http")
 connect = require("connect")
+fs = require("fs")
 
+promos = JSON.parse(fs.readFileSync('./promo.json', 'utf8'))
 
 app = connect()
   .use(connect.json())
   .use(connect.bodyParser())
   .use(connect.favicon())
   .use(connect.static("./frontend/build"))
-  .use("/generate", (req, res, next) ->
+  .use("/list", (req, res, next) ->
+    res.end(JSON.stringify(promos));
+  )
+  .use("/add", (req, res, next) ->
     if "POST" is req.method
-      generateGeometry res
+      id = new Date().getTime()
+      promos.list.push
+        id: id,
+        name: req.body.name
+        message: req.body.message
+        type: req.body.type
+      fs.writeFileSync('./promo.json', JSON.stringify(promos))
+      res.end(id+'');
     else
       next()
   )
-  .use("/save", (req, res, next) ->
-    if "POST" is req.method and req.body.geometry
-      saveGeometry req, res
-    else
-      next()
-  )
-  .use("/load", (req, res, next) ->
-    if "POST" is req.method and req.body.id
-      loadGeometry req, res
+  .use("/remove", (req, res, next) ->
+    if "POST" is req.method
+      promos.list = promos.list.filter (p) -> p.id != req.body.id
+      fs.writeFileSync('./promo.json', JSON.stringify(promos))
+      res.end('true');
     else
       next()
   )
