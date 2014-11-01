@@ -6,7 +6,7 @@ app = connect()
   .use(connect.json())
   .use(connect.bodyParser())
   .use(connect.favicon())
-  .use(connect.static("."))
+  .use(connect.static("./frontend/build"))
   .use("/generate", (req, res, next) ->
     if "POST" is req.method
       generateGeometry res
