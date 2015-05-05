@@ -5,25 +5,7 @@ concat = require 'gulp-concat'
 sourcemaps = require 'gulp-sourcemaps'
 less = require 'gulp-less'
 watch = require 'gulp-watch'
-del = require 'del'
 tinylr = require('tiny-lr')()
-
-#paths =
-#  scripts: ['dist/coffee/**/*.coffee'],
-#  images: 'src/img/**/*'
-
-
-
-
-#gulp.task 'clean', (cb)->
-#  del(['build'], cb)
-
-#gulp.task 'classify', ->
-#  gulp.src 'src/**/*.coffee'
-#    .pipe ngClassify()
-#    .pipe gulp.dest 'dist'
-
-
 
 
 gulp.task 'scripts', ->
