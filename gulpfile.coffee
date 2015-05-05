@@ -23,18 +23,31 @@ gulp.task 'scripts', ->
 
 gulp.task 'vendor', ->
   gulp.src([
+    'node_modules/jquery/dist/jquery.js'
     'node_modules/angular/angular.js'
+    'node_modules/materialize-css/bin/materialize.js'
   ])
   .pipe concat('vendor.min.js')
-  .pipe gulp.dest('frontend/build/js')
+  .pipe gulp.dest('./frontend/build/js')
+
+  gulp.src([
+    'node_modules/materialize-css/bin/materialize.css'
+  ])
+  .pipe concat('vendor.min.css')
+  .pipe(gulp.dest('./frontend/build/css'))
+
+  gulp.src([
+    'node_modules/materialize-css/font/**/*'
+  ])
+  .pipe(gulp.dest('./frontend/build/font'))
 
 gulp.task 'styles', ->
   gulp.src([
     'frontend/src/**/*.css'
   ])
 #  .pipe(less())
-  .pipe concat('all.css')
-  .pipe(gulp.dest('frontend/build/css'))
+  .pipe concat('app.css')
+  .pipe(gulp.dest('./frontend/build/css'))
   .pipe(reload({stream: true}))
 
 gulp.task 'html', ->

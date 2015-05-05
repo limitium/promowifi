@@ -8,6 +8,7 @@
     "coffee-script": "^1.9.2",
     "connect": "~2.14.4",
     "gulp": "^3.8.11",
+    "jquery": "^2.1.4",
     "materialize-css": "^0.96.1"
   },
   "devDependencies": {
