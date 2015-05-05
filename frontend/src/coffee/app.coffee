@@ -1,10 +1,11 @@
 class Main extends Controller
   constructor: (@$scope, @$http) ->
-    $http.get('/list')
+
+    @$http.get('/list')
       .success((data, status, headers, config) =>
         @promos = data.list;
       )
-    $scope.newPromo = {}
+    @$scope.newPromo = {}
   add: =>
     @$http.post('/add',@$scope.newPromo)
       .success((data, status, headers, config) =>
