@@ -9,10 +9,13 @@ reload = browserSync.reload
 
 
 gulp.task 'scripts', ->
-  gulp.src('./frontend/src/**/*.coffee')
+  gulp.src('./frontend/**/*.coffee')
   .pipe sourcemaps.init()
   .pipe ngClassify(
     appName: 'pw'
+    controller:
+      format: 'upperCamelCase'
+      suffix: 'Controller'
   )
   .pipe coffee()
   .pipe concat('app.min.js')
@@ -24,8 +27,9 @@ gulp.task 'scripts', ->
 gulp.task 'vendor', ->
   gulp.src([
     'node_modules/jquery/dist/jquery.js'
-    'node_modules/angular/angular.js'
     'node_modules/materialize-css/bin/materialize.js'
+    'node_modules/angular/angular.js'
+    'node_modules/angular-new-router/dist/router.es5.js'
   ])
   .pipe concat('vendor.min.js')
   .pipe gulp.dest('./frontend/build/js')
