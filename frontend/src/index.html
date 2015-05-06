@@ -9,188 +9,88 @@
 </head>
 
 <body>
+<main>
 
-<div class="container" ng-controller="mainController as m">
-    <div class="jumbotron">
-        <h1>PromoWIFI</h1>
-
-        <p class="lead">Promo notification service based on wifi network names</p>
-
-        <p><a class="btn btn-lg btn-success" href="/lk.apk" role="button"><i class="fa fa-android"></i> Download
-            app</a></p>
+    <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+        <a class="btn-floating btn-large waves-effect waves-light red">
+            <i class="large mdi-content-add"></i>
+        </a>
     </div>
 
-    <div class="row marketing">
-        <div class="col-lg-12">
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th>Promo type</th>
-                    <th>Network name</th>
-                    <th>Message</th>
-                    <th>Del</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr ng-repeat="promo in m.promos">
-                    <td><i class="fa" ng-class="{'fa-gift':promo.type=='promo','fa-dollar':promo.type=='sale'}"></i>
-                    </td>
-                    <td ng-bind="promo.name"></td>
-                    <td ng-bind="promo.message"></td>
-                    <td style="cursor: pointer;" ng-click="m.remove(promo.id)"><i class="fa fa-remove"></i></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <hr>
-
-    <div class="row">
-        <div class="col-lg-12">
-            <form role="form" name="wifiForm">
-                <div class="form-group">
-                    <label for="wifiname">WIFI name</label>
-                    <input type="text" class="form-control" id="wifiname" required="required"
-                           placeholder="Enter wifi name" ng-model="newPromo.name">
-                </div>
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <input type="text" class="form-control" id="message" required="required"
-                           placeholder="Enter message" ng-model="newPromo.message">
-                </div>
-                <div class="form-group">
-                    <div class="radio">
-                        <label>
-                            <input type="radio" value="promo" name="type" required="required" ng-model="newPromo.type">
-                            <i class="fa fa-gift"></i> Promo
-                        </label>
-                    </div>
-                    <div class="radio">
-                        <label>
-                            <input type="radio" value="sale" name="type" required="required" ng-model="newPromo.type">
-                            <i class="fa fa-dollar"></i> Sale
-                        </label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <button ng-disabled="!wifiForm.$valid" ng-class="{disabled:!wifiForm.$valid}" ng-click="m.add()"
-                            class="btn btn-primary"><i
-                            class="fa fa-wifi"></i>
-                        Add
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-    <div class="footer">
-        <p>&copy; Leadkit 2014</p>
-    </div>
-
-</div>
-<nav class="light-blue lighten-1" role="navigation">
-    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Logo</a>
-        <ul class="right hide-on-med-and-down">
-            <li><a href="#">Navbar Link</a></li>
-        </ul>
-
-        <ul id="nav-mobile" class="side-nav">
-            <li><a href="#">Navbar Link</a></li>
-        </ul>
-        <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
-    </div>
-</nav>
-<div class="section no-pad-bot" id="index-banner">
-    <div class="container">
-        <br><br>
-        <h1 class="header center orange-text">Starter Template</h1>
-        <div class="row center">
-            <h5 class="header col s12 light">A modern responsive front-end framework based on Material Design</h5>
-        </div>
-        <div class="row center">
-            <a href="http://materializecss.com/getting-started.html" id="download-button" class="btn-large waves-effect waves-light orange">Get Started</a>
-        </div>
-        <br><br>
-
-    </div>
-</div>
-
-
-<div class="container">
-    <div class="section">
-
-        <!--   Icon Section   -->
+    <div class="container" ng-controller="mainController as m">
         <div class="row">
-            <div class="col s12 m4">
-                <div class="icon-block">
-                    <h2 class="center light-blue-text"><i class="mdi-image-flash-on"></i></h2>
-                    <h5 class="center">Speeds up development</h5>
+            <div ng-repeat="promo in m.promos">
+                <div class="col l6 m12">
+                    <div class="card">
+                        <div class="card-image waves-effect waves-block waves-light">
+                            <img class="activator" ng-src="http://lorempixel.com/200/400/nightlife/">
+                        </div>
+                        <div class="card-content">
+                            <span class="card-title activator grey-text text-darken-4">
+                                <span ng-bind="promo.name"></span> <i class="mdi-navigation-more-vert right"></i>
+                            </span>
 
-                    <p class="light">We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components. Additionally, we refined animations and transitions to provide a smoother experience for developers.</p>
+                            <p class="grey-text text-darken-1">
+                                18 minutes ago <span>&#9900;</span> 81 views
+                            </p>
+                        </div>
+                        <div class="card-reveal">
+                            <span class="card-title grey-text text-darken-4">
+                                <span ng-bind="promo.name"></span> <i class="mdi-navigation-close right"></i>
+                            </span>
+                            <div class="grey-text text-darken-1">
+                                <p class="flow-text" ng-bind="promo.message"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--<div style="cursor: pointer;" ng-click="m.remove(promo.id)"><i class="fa fa-remove"></i></div>-->
                 </div>
-            </div>
 
-            <div class="col s12 m4">
-                <div class="icon-block">
-                    <h2 class="center light-blue-text"><i class="mdi-social-group"></i></h2>
-                    <h5 class="center">User Experience Focused</h5>
-
-                    <p class="light">By utilizing elements and principles of Material Design, we were able to create a framework that incorporates components and animations that provide more feedback to users. Additionally, a single underlying responsive system across all platforms allow for a more unified user experience.</p>
-                </div>
-            </div>
-
-            <div class="col s12 m4">
-                <div class="icon-block">
-                    <h2 class="center light-blue-text"><i class="mdi-action-settings"></i></h2>
-                    <h5 class="center">Easy to work with</h5>
-
-                    <p class="light">We have provided detailed documentation as well as specific code examples to help new users get started. We are also always open to feedback and can answer any questions a user may have about Materialize.</p>
-                </div>
             </div>
         </div>
-
     </div>
-    <br><br>
+</main>
 
-    <div class="section">
 
+<div class="row">
+    <div class="col-lg-12">
+        <form role="form" name="wifiForm">
+            <div class="form-group">
+                <label for="wifiname">WIFI name</label>
+                <input type="text" class="form-control" id="wifiname" required="required"
+                       placeholder="Enter wifi name" ng-model="newPromo.name">
+            </div>
+            <div class="form-group">
+                <label for="message">Message</label>
+                <input type="text" class="form-control" id="message" required="required"
+                       placeholder="Enter message" ng-model="newPromo.message">
+            </div>
+            <div class="form-group">
+                <div class="radio">
+                    <label>
+                        <input type="radio" value="promo" name="type" required="required" ng-model="newPromo.type">
+                        <i class="fa fa-gift"></i> Promo
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" value="sale" name="type" required="required" ng-model="newPromo.type">
+                        <i class="fa fa-dollar"></i> Sale
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <button ng-disabled="!wifiForm.$valid" ng-class="{disabled:!wifiForm.$valid}" ng-click="m.add()"
+                        class="btn btn-primary"><i
+                        class="fa fa-wifi"></i>
+                    Add
+                </button>
+            </div>
+        </form>
     </div>
 </div>
-
-<footer class="page-footer orange">
-    <div class="container">
-        <div class="row">
-            <div class="col l6 s12">
-                <h5 class="white-text">Company Bio</h5>
-                <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.</p>
-
-
-            </div>
-            <div class="col l3 s12">
-                <h5 class="white-text">Settings</h5>
-                <ul>
-                    <li><a class="white-text" href="#!">Link 1</a></li>
-                    <li><a class="white-text" href="#!">Link 2</a></li>
-                    <li><a class="white-text" href="#!">Link 3</a></li>
-                    <li><a class="white-text" href="#!">Link 4</a></li>
-                </ul>
-            </div>
-            <div class="col l3 s12">
-                <h5 class="white-text">Connect</h5>
-                <ul>
-                    <li><a class="white-text" href="#!">Link 1</a></li>
-                    <li><a class="white-text" href="#!">Link 2</a></li>
-                    <li><a class="white-text" href="#!">Link 3</a></li>
-                    <li><a class="white-text" href="#!">Link 4</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="footer-copyright">
-        <div class="container">
-            Made by <a class="orange-text text-lighten-3" href="http://materializecss.com">Materialize</a>
-        </div>
-    </div>
-</footer>
+</div>
 <script src="js/vendor.min.js?2"></script>
 <script src="js/app.min.js?2"></script>
 </body>
