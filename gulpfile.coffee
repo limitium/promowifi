@@ -57,8 +57,10 @@ gulp.task 'html', ->
 
 gulp.task 'browser-sync', ->
   browserSync(
-    server:
-      baseDir: "./frontend/build"
+    proxy: 'localhost:8020'
+    port: 3000
+    open: true
+    notify: false
   )
 
 gulp.task 'watch', ->
