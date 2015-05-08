@@ -1,5 +1,5 @@
 class Main extends Controller
-  constructor: (@$router, @$http) ->
+  constructor: (@$router) ->
     @$router.config [
       path: '/'
       redirectTo : '/offers'
@@ -12,8 +12,6 @@ class Main extends Controller
       components:
         main: 'offerNew'
     ]
-
-
 
 
 class App extends App

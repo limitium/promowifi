@@ -1,3 +1,15 @@
 class OfferNew extends Controller
-  constructor: ->
-    @name = 'aaaaaaaaaaaaaaaa';
+  constructor: (@$http)->
+    @newPromo = {}
+  add: =>
+    @$http.post('/add', @newPromo)
+    .success((data, status, headers, config) =>
+      @newPromo.id = data
+    )
+#    @promos.push @newPromo
+    @newPromo = {}
+  remove: (id)=>
+    @$http.post('/remove', {id: id})
+    .success((data, status, headers, config) =>
+      @promos = @promos.filter (p) -> p.id != id
+    )

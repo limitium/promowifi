@@ -68,8 +68,8 @@ gulp.task 'browser-sync', ->
   )
 
 gulp.task 'watch', ->
-  gulp.watch(['./frontend/src/coffee/**/*.coffee'], ['scripts'])
+  gulp.watch(['./frontend/src/**/*.coffee'], ['scripts'])
   #  gulp.watch(['./frontend/src/less/**/*.less'], ['styles'])
-  gulp.watch(['./frontend/src/*.html'], ['html'])
+  gulp.watch(['./frontend/src/**/*.html'], ['html'])
 
 gulp.task('default', ['vendor', 'scripts', 'styles', 'html', 'browser-sync', 'watch'])
