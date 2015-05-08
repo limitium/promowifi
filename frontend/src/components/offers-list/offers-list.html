@@ -1,0 +1,39 @@
+<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+    <a ng-link="main:offerNew" class="btn-floating btn-large waves-effect waves-light red">
+        <i class="large mdi-content-add"></i>
+    </a>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div ng-repeat="promo in offersList.promos">
+            <div class="col l6 m12">
+                <div class="card">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <img class="activator" ng-src="http://lorempixel.com/200/400/nightlife/">
+                    </div>
+                    <div class="card-content">
+                            <span class="card-title activator grey-text text-darken-4">
+                                <span ng-bind="promo.name"></span> <i class="mdi-navigation-more-vert right"></i>
+                            </span>
+
+                        <p class="grey-text text-darken-1">
+                            18 minutes ago <span>&#9900;</span> 81 views
+                        </p>
+                    </div>
+                    <div class="card-reveal">
+                            <span class="card-title grey-text text-darken-4">
+                                <span ng-bind="promo.name"></span> <i class="mdi-navigation-close right"></i>
+                            </span>
+                        <div class="grey-text text-darken-1">
+                            <p class="flow-text" ng-bind="promo.message"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!--<div style="cursor: pointer;" ng-click="m.remove(promo.id)"><i class="fa fa-remove"></i></div>-->
+            </div>
+
+        </div>
+    </div>
+</div>

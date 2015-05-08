@@ -1,35 +1,19 @@
 class Main extends Controller
-  constructor: (@$router, @$scope, @$http) ->
+  constructor: (@$router, @$http) ->
     @$router.config [
       path: '/'
-      redirectTo : '/home'
+      redirectTo : '/offers'
     ,
-      path: '/home'
+      path: '/offers'
       components:
-        main:'home'
+        main:'offersList'
     ,
-      path: '/test'
+      path: '/offer/new'
       components:
-        main: 'test'
+        main: 'offerNew'
     ]
 
-    @$http.get('/list')
-    .success((data, status, headers, config) =>
-      @promos = data.list;
-    )
-    @$scope.newPromo = {}
-  add: =>
-    @$http.post('/add', @$scope.newPromo)
-    .success((data, status, headers, config) =>
-      @$scope.newPromo.id = data
-    )
-    @promos.push @$scope.newPromo
-    @$scope.newPromo = {}
-  remove: (id)=>
-    @$http.post('/remove', {id: id})
-    .success((data, status, headers, config) =>
-      @promos = @promos.filter (p) -> p.id != id
-    )
+
 
 
 class App extends App

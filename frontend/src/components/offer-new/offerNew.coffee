@@ -1,3 +1,3 @@
-class Test extends Controller
+class OfferNew extends Controller
   constructor: ->
     @name = 'aaaaaaaaaaaaaaaa';
