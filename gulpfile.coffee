@@ -6,7 +6,14 @@ ngClassify = require 'gulp-ng-classify'
 watch = require 'gulp-watch'
 browserSync = require('browser-sync')
 reload = browserSync.reload
+exec = require('child_process').exec;
 
+gulp.task 'server', ->
+  exec 'php backend/app/console server:stop -v', (err, stdout, stderr) ->
+  exec 'php backend/app/console server:start -v', (err, stdout, stderr) ->
+    console.log(stdout)
+    console.log(stderr)
+    console.log(err)
 
 gulp.task 'scripts', ->
   gulp.src('./frontend/**/*.coffee')
@@ -61,7 +68,7 @@ gulp.task 'html', ->
 
 gulp.task 'browser-sync', ->
   browserSync(
-    proxy: 'localhost:8020'
+    proxy: 'localhost:8000'
     port: 3000
     open: true
     notify: false
@@ -72,4 +79,4 @@ gulp.task 'watch', ->
   #  gulp.watch(['./frontend/src/less/**/*.less'], ['styles'])
   gulp.watch(['./frontend/src/**/*.html'], ['html'])
 
-gulp.task('default', ['vendor', 'scripts', 'styles', 'html', 'browser-sync', 'watch'])
+gulp.task('default', ['server', 'vendor', 'scripts', 'styles', 'html', 'browser-sync', 'watch'])
