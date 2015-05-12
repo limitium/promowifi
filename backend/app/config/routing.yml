@@ -1,3 +1,4 @@
-loc2me_offer:
-    resource: "@loc2meOfferBundle/Controller/"
-    type:     annotation
+_main:
+    resource: routing_rest.yml
+    prefix: /api
+

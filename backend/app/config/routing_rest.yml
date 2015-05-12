@@ -1,0 +1,3 @@
+offers:
+    type:     rest
+    resource: loc2me\OfferBundle\Controller\OffersController
