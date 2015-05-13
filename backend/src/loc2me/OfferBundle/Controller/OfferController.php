@@ -36,6 +36,7 @@ class OfferController extends Controller
 
         $em->persist($offerLookUp);
         $em->flush();
+
         return $em
             ->getRepository('loc2meOfferBundle:Offer')
             ->findByWifiName($wifiName);
@@ -62,7 +63,6 @@ class OfferController extends Controller
     {
         return $offer;
     }
-
 
     /**
      * @Rest\View

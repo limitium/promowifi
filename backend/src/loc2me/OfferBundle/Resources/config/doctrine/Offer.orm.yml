@@ -12,3 +12,13 @@ loc2me\OfferBundle\Entity\Offer:
         description:
             type: text
             nullable: true
+        created_at:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: create
+        updated_at:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: update

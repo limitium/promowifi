@@ -20,6 +20,7 @@ class AppKernel extends Kernel
 
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new FOS\RestBundle\FOSRestBundle(),
+
             new loc2me\OfferBundle\loc2meOfferBundle(),
         );
 

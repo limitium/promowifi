@@ -19,6 +19,10 @@ class OfferLookUp
      */
     private $wifiName;
 
+    /**
+     * @var \DateTime
+     */
+    private $created_at;
 
     /**
      * Get id
@@ -51,5 +55,28 @@ class OfferLookUp
     public function getWifiName()
     {
         return $this->wifiName;
+    }
+
+    /**
+     * Set created_at
+     *
+     * @param \DateTime $createdAt
+     * @return OfferLookUp
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->created_at = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get created_at
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->created_at;
     }
 }
