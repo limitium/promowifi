@@ -25,9 +25,21 @@ class OfferController extends Controller
         return $offers;
     }
 
+    /**
+     * @Rest\View
+     * @param Offer $offer
+     * @return Offer
+     */
+    public function getOfferAction(Offer $offer)
+    {
+        return $offer;
+    }
+
 
     /**
      * @Rest\View
+     * @param Request $request
+     * @return View|Response
      */
     public function postOffersAction(Request $request)
     {
@@ -36,7 +48,6 @@ class OfferController extends Controller
 
     private function processForm(Request $request, Offer $offer)
     {
-//        $statusCode = $offer->isNew() ? 201 : 204;
 
         $form = $this->createForm(new OfferType(), $offer);
         $form->handleRequest($request);
@@ -46,17 +57,14 @@ class OfferController extends Controller
             $em->persist($offer);
             $em->flush();
             $response = new Response();
-//            $response->setStatusCode($statusCode);
+            $response->setStatusCode(201);
 
-            // set the `Location` header only when creating new resources
-//            if (201 === $statusCode) {
-//                $response->headers->set('Location',
-//                    $this->generateUrl(
-//                        'acme_demo_user_get', array('id' => $offer->getId()),
-//                        true // absolute
-//                    )
-//                );
-//            }
+            $response->headers->set('Location',
+                $this->generateUrl(
+                    'get_offer', array('offer' => $offer->getId()),
+                    true // absolute
+                )
+            );
 
             return $response;
         }
