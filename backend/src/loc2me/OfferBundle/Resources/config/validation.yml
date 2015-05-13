@@ -1,0 +1,3 @@
+loc2me\OfferBundle\Entity\Offer:
+    wifiName:
+        - NotBlank:

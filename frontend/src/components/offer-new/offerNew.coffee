@@ -2,7 +2,7 @@ class OfferNew extends Controller
   constructor: (@$http)->
     @newPromo = {}
   add: =>
-    @$http.post('/add', @newPromo)
+    @$http.post('/api/offers', @newPromo)
     .success((data, status, headers, config) =>
       @newPromo.id = data
     )

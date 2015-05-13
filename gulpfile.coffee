@@ -8,12 +8,15 @@ browserSync = require('browser-sync')
 reload = browserSync.reload
 exec = require('child_process').exec;
 
+
+buildFolder = './backend/web'
+
 gulp.task 'server', ->
   exec 'php backend/app/console server:stop -v', (err, stdout, stderr) ->
-  exec 'php backend/app/console server:start -v', (err, stdout, stderr) ->
-    console.log(stdout)
-    console.log(stderr)
-    console.log(err)
+    exec 'php backend/app/console server:start -v', (err, stdout, stderr) ->
+      console.log(stdout)
+      console.log(stderr)
+      console.log(err)
 
 gulp.task 'scripts', ->
   gulp.src('./frontend/**/*.coffee')
@@ -27,7 +30,7 @@ gulp.task 'scripts', ->
   .pipe coffee()
   .pipe concat('app.min.js')
   .pipe sourcemaps.write()
-  .pipe gulp.dest('./frontend/build/js')
+  .pipe gulp.dest(buildFolder+'/js')
   .pipe(reload({stream: true}))
 
 
@@ -39,18 +42,18 @@ gulp.task 'vendor', ->
     'node_modules/angular-new-router/dist/router.es5.js'
   ])
   .pipe concat('vendor.min.js')
-  .pipe gulp.dest('./frontend/build/js')
+  .pipe gulp.dest(buildFolder+'/js')
 
   gulp.src([
     'node_modules/materialize-css/bin/materialize.css'
   ])
   .pipe concat('vendor.min.css')
-  .pipe(gulp.dest('./frontend/build/css'))
+  .pipe(gulp.dest(buildFolder+'/css'))
 
   gulp.src([
     'node_modules/materialize-css/font/**/*'
   ])
-  .pipe(gulp.dest('./frontend/build/font'))
+  .pipe(gulp.dest(buildFolder+'/font'))
 
 gulp.task 'styles', ->
   gulp.src([
@@ -58,12 +61,12 @@ gulp.task 'styles', ->
   ])
 #  .pipe(less())
   .pipe concat('app.css')
-  .pipe(gulp.dest('./frontend/build/css'))
+  .pipe(gulp.dest(buildFolder+'/css'))
   .pipe(reload({stream: true}))
 
 gulp.task 'html', ->
   gulp.src('./frontend/src/**/*html')
-  .pipe(gulp.dest('./frontend/build'))
+  .pipe(gulp.dest(buildFolder+''))
   .pipe(reload({stream: true}))
 
 gulp.task 'browser-sync', ->

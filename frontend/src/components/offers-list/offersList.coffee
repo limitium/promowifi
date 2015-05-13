@@ -1,6 +1,6 @@
 class OffersList extends Controller
   constructor: (@$router, @$http) ->
-    @$http.get('/list')
+    @$http.get('/api/offers')
     .success((data, status, headers, config) =>
-      @promos = data.list;
+      @promos = data;
     )

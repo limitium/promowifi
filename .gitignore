@@ -1,5 +1,5 @@
 # Packages
 /node_modules/
-/fronted/build/*
+/frontend/build/*
 /.idea/*
 /npm-debug.log
