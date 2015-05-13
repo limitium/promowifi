@@ -3,8 +3,13 @@
 namespace loc2me\OfferBundle\Controller;
 
 use FOS\RestBundle\Controller\Annotations as Rest;
+use FOS\RestBundle\Request\ParamFetcher;
+
+use FOS\RestBundle\Controller\Annotations\QueryParam;
+
 use FOS\RestBundle\View\View;
 use loc2me\OfferBundle\Entity\Offer;
+use loc2me\OfferBundle\Entity\OfferLookUp;
 use loc2me\OfferBundle\Form\OfferType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,15 +19,38 @@ class OfferController extends Controller
 {
     /**
      * @Rest\View
+     * @Rest\QueryParam(name="name", nullable=false, requirements="\w+")
+     *
+     * @param ParamFetcher $params
+     * @return
+     */
+    public function getOffersSearchAction(ParamFetcher $params)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+
+        $wifiName = $params->get('name', '');
+
+        $offerLookUp = new OfferLookUp();
+        $offerLookUp->setWifiName($wifiName);
+
+        $em->persist($offerLookUp);
+        $em->flush();
+        return $em
+            ->getRepository('loc2meOfferBundle:Offer')
+            ->findByWifiName($wifiName);
+    }
+
+    /**
+     * @Rest\View
      */
     public function getOffersAction()
     {
         $em = $this->getDoctrine()->getManager();
 
-        $offers = $em
+        return $em
             ->getRepository('loc2meOfferBundle:Offer')
             ->findAll();
-        return $offers;
     }
 
     /**
