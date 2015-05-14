@@ -22,3 +22,9 @@ loc2me\OfferBundle\Entity\Offer:
             gedmo:
                 timestampable:
                     on: update
+    oneToOne:
+            Image:
+                targetEntity: loc2me\OfferBundle\Entity\Image
+                mappedBy: Offer
+                cascade:
+                    - all

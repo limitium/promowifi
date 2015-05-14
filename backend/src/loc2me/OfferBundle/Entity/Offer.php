@@ -38,6 +38,8 @@ class Offer
      * @var integer
      */
     private $views;
+
+    private $rawImage;
     /**
      * Get id
      *
@@ -154,5 +156,51 @@ class Offer
     public function setViews($views)
     {
         $this->views = $views;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRawImage()
+    {
+        return $this->rawImage;
+    }
+
+    /**
+     * @param mixed $rawImage
+     */
+    public function setRawImage($rawImage)
+    {
+        $this->rawImage = $rawImage;
+    }
+
+
+    /**
+     * @var \loc2me\OfferBundle\Entity\Image
+     */
+    private $Image;
+
+
+    /**
+     * Set Image
+     *
+     * @param \loc2me\OfferBundle\Entity\Image $image
+     * @return Offer
+     */
+    public function setImage(\loc2me\OfferBundle\Entity\Image $image = null)
+    {
+        $this->Image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get Image
+     *
+     * @return \loc2me\OfferBundle\Entity\Image 
+     */
+    public function getImage()
+    {
+        return $this->Image;
     }
 }

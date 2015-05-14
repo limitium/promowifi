@@ -16,6 +16,7 @@ class OfferType extends AbstractType
     {
         $builder
             ->add('wifiName')
+            ->add('rawImage')
             ->add('description')
         ;
     }

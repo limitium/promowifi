@@ -4,40 +4,49 @@
             <form role="form" name="wifiForm">
                 <div class="input-field">
                     <i class="mdi-device-network-wifi prefix"></i>
-                    <input type="text" class="validate" id="wifiname" required="required"
-                           ng-model="offerNew.offer.wifiName" length="20">
+                    <input type="text"
+                           name="name"
+                           id="wifiname"
+                           ng-class="{invalid:wifiForm.name.$invalid}"
+                           required="required"
+                           ng-model="offerNew.offer.wifiName">
+
                     <label for="wifiname">WIFI name</label>
                 </div>
                 <div class="file-field input-field">
-                    <input class="file-path validate" type="text"/>
+                    <input class="file-path validate" type="text"
+                           ng-class="{invalid:wifiForm.image.$invalid}"
+                           disabled
+                           ng-model="offerNew.fileName"/>
 
                     <div class="btn">
                         <span>File</span>
-                        <input type="file" required="required"/>
+                        <input type="file"
+                               name="image"
+                               valid-file
+                               change-file="offerNew.fileChange(event)"
+                               required="required"
+                               accept="image/png"
+                               ng-model="offerNew.file"/>
                     </div>
                 </div>
+
                 <div class="input-field">
-                    <i class="mdi-action-subject prefix"></i>
-                    <textarea id="message" class="validate materialize-textarea" ng-model="offerNew.offer.description"
-                              length="140"></textarea>
-                    <label for="message">Description</label>
+                    <img ng-src="{{offerNew.filePreview}}"/>
                 </div>
 
+                <div class="input-field">
+                    <i class="mdi-action-subject prefix"></i>
+                    <textarea id="message"
+                              class="validate materialize-textarea"
+                              name="description"
+                              ng-class="{invalid:wifiForm.description.$invalid}"
+                              ng-model="offerNew.offer.description"
+                              length="140">
 
-                <!--<div class="input-field">-->
-                <!--<div class="radio">-->
-                <!--<label>-->
-                <!--<input type="radio" value="promo" name="type" required="required" ng-model="newPromo.type">-->
-                <!--<i class="fa fa-gift"></i> Promo-->
-                <!--</label>-->
-                <!--</div>-->
-                <!--<div class="radio">-->
-                <!--<label>-->
-                <!--<input type="radio" value="sale" name="type" required="required" ng-model="newPromo.type">-->
-                <!--<i class="fa fa-dollar"></i> Sale-->
-                <!--</label>-->
-                <!--</div>-->
-                <!--</div>-->
+                    </textarea>
+                    <label for="message">Description</label>
+                </div>
                 <div class="input-field">
                     <a
                             ng-link="main:offersList"

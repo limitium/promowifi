@@ -8,6 +8,8 @@ use FOS\RestBundle\Request\ParamFetcher;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 
 use FOS\RestBundle\View\View;
+use loc2me\OfferBundle\Entity\File;
+use loc2me\OfferBundle\Entity\Image;
 use loc2me\OfferBundle\Entity\Offer;
 use loc2me\OfferBundle\Entity\OfferLookUp;
 use loc2me\OfferBundle\Form\OfferType;
@@ -82,9 +84,12 @@ class OfferController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+            $this->uploadImage($offer);
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($offer);
             $em->flush();
+
             $response = new Response();
             $response->setStatusCode(201);
 
@@ -99,5 +104,53 @@ class OfferController extends Controller
         }
 
         return View::create($form, 400);
+    }
+
+    private function uploadImage(Offer $offer)
+    {
+        if ($offer->getRawImage()) {
+            $hash = $this->upload($offer->getRawImage());
+
+            $image = $offer->getImage();
+            if (!$image) {
+                $image = new Image();
+            } else {
+                $this->deleteImage($image);
+            }
+            $image->setHash($hash);
+            $image->setOffer($offer);
+            $offer->setImage($image);
+        }
+    }
+
+
+    private function upload($imgDataUrl)
+    {
+        list($type, $data) = explode(';', $imgDataUrl);
+        list(, $data) = explode(',', $data);
+        $decodedData = base64_decode($data);
+        $hash = md5($decodedData);
+        $hash = md5($hash . microtime(1));
+
+        $fileName = $this->getImageName($hash);
+        file_put_contents($fileName, $decodedData);
+        return $hash;
+    }
+
+    /**
+     * @param $hash
+     * @return string
+     */
+    private function getImageName($hash)
+    {
+        $uploadPath = $this->get('kernel')->getRootDir() . '/../web/cdn/';
+
+        $fileName = $uploadPath . $hash . '.png';
+        return $fileName;
+    }
+
+    private function deleteImage(Image $image)
+    {
+        unlink($this->getImageName($image->getHash()));
     }
 }
