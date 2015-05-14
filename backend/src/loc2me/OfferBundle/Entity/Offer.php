@@ -35,6 +35,10 @@ class Offer
     private $updated_at;
 
     /**
+     * @var integer
+     */
+    private $views;
+    /**
      * Get id
      *
      * @return integer
@@ -134,5 +138,21 @@ class Offer
     public function getUpdatedAt()
     {
         return $this->updated_at;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getViews()
+    {
+        return $this->views;
+    }
+
+    /**
+     * @param mixed $views
+     */
+    public function setViews($views)
+    {
+        $this->views = $views;
     }
 }

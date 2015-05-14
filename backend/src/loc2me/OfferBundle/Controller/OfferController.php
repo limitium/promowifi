@@ -78,6 +78,7 @@ class OfferController extends Controller
     {
 
         $form = $this->createForm(new OfferType(), $offer);
+
         $form->handleRequest($request);
 
         if ($form->isValid()) {

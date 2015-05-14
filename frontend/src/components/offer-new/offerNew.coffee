@@ -1,16 +1,15 @@
 class OfferNew extends Controller
   constructor: (@$http)->
-    @newPromo = {}
-    @$http.post('/api/offers/lookup', {
-      wifi_name: 111
-    })
+    @offer =
+      wifiName: ''
+      description: ''
+
   add: =>
-    @$http.post('/api/offers', @newPromo)
+    @$http.post('/api/offers', @offer)
     .success((data, status, headers, config) =>
-      @newPromo.id = data
+      @offer.wifiName = ''
+      @offer.description = ''
     )
-    #    @promos.push @newPromo
-    @newPromo = {}
   remove: (id)=>
     @$http.post('/remove', {id: id})
     .success((data, status, headers, config) =>
