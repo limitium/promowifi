@@ -16,6 +16,6 @@ class Main extends Controller
 
 class App extends App
   constructor: ->
-    return ['ngNewRouter']
+    return ['ngNewRouter','angularMoment']
 
 

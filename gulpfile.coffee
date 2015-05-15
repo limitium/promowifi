@@ -40,6 +40,8 @@ gulp.task 'vendor', ->
     'node_modules/materialize-css/bin/materialize.js'
     'node_modules/angular/angular.js'
     'node_modules/angular-new-router/dist/router.es5.js'
+    'node_modules/angular-moment/node_modules/moment/moment.js'
+    'node_modules/angular-moment/angular-moment.js'
   ])
   .pipe concat('vendor.min.js')
   .pipe gulp.dest(buildFolder+'/js')
