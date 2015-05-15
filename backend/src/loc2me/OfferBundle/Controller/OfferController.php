@@ -11,7 +11,7 @@ use FOS\RestBundle\View\View;
 use loc2me\OfferBundle\Entity\File;
 use loc2me\OfferBundle\Entity\Image;
 use loc2me\OfferBundle\Entity\Offer;
-use loc2me\OfferBundle\Entity\OfferLookUp;
+use loc2me\OfferBundle\Entity\OfferLookup;
 use loc2me\OfferBundle\Form\OfferType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -33,15 +33,23 @@ class OfferController extends Controller
 
         $wifiName = $params->get('name', '');
 
-        $offerLookUp = new OfferLookUp();
-        $offerLookUp->setWifiName($wifiName);
+        $offerLookup = new OfferLookup();
+        $offerLookup->setWifiName($wifiName);
 
-        $em->persist($offerLookUp);
-        $em->flush();
 
-        return $em
+        $offers = $em
             ->getRepository('loc2meOfferBundle:Offer')
             ->findByWifiName($wifiName);
+
+        /** @var Offer $offer */
+        foreach ($offers as $offer) {
+            $offer->addLookup($offerLookup);
+            $offerLookup->addOffer($offer);
+        }
+
+        $em->persist($offerLookup);
+        $em->flush();
+        return $offers;
     }
 
     /**

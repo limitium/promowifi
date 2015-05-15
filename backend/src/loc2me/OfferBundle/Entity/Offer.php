@@ -203,4 +203,49 @@ class Offer
     {
         return $this->Image;
     }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $Lookups;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->Lookups = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add Lookups
+     *
+     * @param \loc2me\OfferBundle\Entity\OfferLookUp $lookups
+     * @return Offer
+     */
+    public function addLookup(\loc2me\OfferBundle\Entity\OfferLookUp $lookups)
+    {
+        $this->Lookups[] = $lookups;
+
+        return $this;
+    }
+
+    /**
+     * Remove Lookups
+     *
+     * @param \loc2me\OfferBundle\Entity\OfferLookUp $lookups
+     */
+    public function removeLookup(\loc2me\OfferBundle\Entity\OfferLookUp $lookups)
+    {
+        $this->Lookups->removeElement($lookups);
+    }
+
+    /**
+     * Get Lookups
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getLookups()
+    {
+        return $this->Lookups;
+    }
 }

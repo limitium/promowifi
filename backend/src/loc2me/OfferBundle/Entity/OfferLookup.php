@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * OfferLookUp
  */
-class OfferLookUp
+class OfferLookup
 {
     /**
      * @var integer
@@ -38,7 +38,7 @@ class OfferLookUp
      * Set wifiName
      *
      * @param string $wifiName
-     * @return OfferLookUp
+     * @return OfferLookup
      */
     public function setWifiName($wifiName)
     {
@@ -61,7 +61,7 @@ class OfferLookUp
      * Set created_at
      *
      * @param \DateTime $createdAt
-     * @return OfferLookUp
+     * @return OfferLookup
      */
     public function setCreatedAt($createdAt)
     {
@@ -78,5 +78,50 @@ class OfferLookUp
     public function getCreatedAt()
     {
         return $this->created_at;
+    }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $Offers;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->Offers = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add Offers
+     *
+     * @param \loc2me\OfferBundle\Entity\Offer $offers
+     * @return OfferLookup
+     */
+    public function addOffer(\loc2me\OfferBundle\Entity\Offer $offers)
+    {
+        $this->Offers[] = $offers;
+
+        return $this;
+    }
+
+    /**
+     * Remove Offers
+     *
+     * @param \loc2me\OfferBundle\Entity\Offer $offers
+     */
+    public function removeOffer(\loc2me\OfferBundle\Entity\Offer $offers)
+    {
+        $this->Offers->removeElement($offers);
+    }
+
+    /**
+     * Get Offers
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getOffers()
+    {
+        return $this->Offers;
     }
 }

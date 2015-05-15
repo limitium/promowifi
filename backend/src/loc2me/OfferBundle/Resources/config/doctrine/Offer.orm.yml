@@ -28,3 +28,7 @@ loc2me\OfferBundle\Entity\Offer:
                 mappedBy: Offer
                 cascade:
                     - all
+    manyToMany:
+        Lookups:
+            targetEntity: OfferLookup
+            mappedBy: Offers

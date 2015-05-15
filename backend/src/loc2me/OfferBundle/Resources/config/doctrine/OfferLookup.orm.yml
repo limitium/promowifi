@@ -1,0 +1,29 @@
+loc2me\OfferBundle\Entity\OfferLookup:
+    type: entity
+    fields:
+        id:
+            id: true
+            type: integer
+            generator:
+                strategy: AUTO
+        wifiName:
+            type: string
+            nullable: false
+        created_at:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: create
+    manyToMany:
+        Offers:
+            targetEntity: Offer
+            inversedBy: Lookups
+            joinTable:
+                name: OfferShow
+                joinColumns:
+                    offer_lookup_id:
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    offer_id:
+                        referencedColumnName: id
+
