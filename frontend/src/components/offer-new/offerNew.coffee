@@ -5,31 +5,32 @@ class OfferNew extends Controller
       description: ''
       rawImage: null
 
-    @file = null
-    @fileName = ''
-    @filePreview = ''
+    @img =
+      file: null
+      preview: null
+
+    @busy = false
 
   fileChange: (event) =>
-    @file = event.target.files?[0]
-    @fileName = @file.name if @file
+    @img.file = event.target.files?[0]
 
     reader = new FileReader()
     reader.onload = =>
-      @filePreview = reader.result
-      @offer.rawImage = @filePreview
+      @img.preview = reader.result
+      @offer.rawImage = @img.preview
       @$rootScope.$apply()
 
-    reader.readAsDataURL(@file)
+    reader.readAsDataURL(@img.file)
 
   add: =>
+    @busy = true
     @$http.post('/api/offers', @offer)
     .success((data, status, headers, config) =>
       @offer.wifiName = ''
       @offer.description = ''
+      @img.file = null
+      @img.preview = null
     )
-
-  remove: (id)=>
-    @$http.post('/remove', {id: id})
-    .success((data, status, headers, config) =>
-      @promos = @promos.filter (p) -> p.id != id
+    .finally(=>
+      @busy = false
     )

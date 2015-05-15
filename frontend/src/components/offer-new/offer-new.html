@@ -17,7 +17,7 @@
                     <input class="file-path validate" type="text"
                            ng-class="{invalid:wifiForm.image.$invalid}"
                            disabled
-                           ng-model="offerNew.fileName"/>
+                           ng-model="offerNew.img.file.name"/>
 
                     <div class="btn">
                         <span>File</span>
@@ -27,12 +27,12 @@
                                change-file="offerNew.fileChange(event)"
                                required="required"
                                accept="image/png"
-                               ng-model="offerNew.file"/>
+                               ng-model="offerNew.img.file"/>
                     </div>
                 </div>
 
                 <div class="input-field">
-                    <img ng-src="{{offerNew.filePreview}}"/>
+                    <img ng-show="offerNew.img.preview" ng-src="{{offerNew.img.preview}}"/>
                 </div>
 
                 <div class="input-field">
@@ -48,15 +48,22 @@
                     <label for="message">Description</label>
                 </div>
                 <div class="input-field">
+                    <div ng-show="offerNew.busy" class="progress">
+                        <div class="indeterminate"></div>
+                    </div>
+                </div>
+                <div class="input-field">
                     <a
                             ng-link="main:offersList"
+                            ng-disabled="offerNew.busy"
+                            ng-class="{disabled:offerNew.busy}"
                             class="left waves-effect waves-light btn-large">
                         <i class="mdi-navigation-arrow-back left"></i>
                         Cancel
                     </a>
                     <button
-                            ng-disabled="!wifiForm.$valid"
-                            ng-class="{disabled:!wifiForm.$valid}"
+                            ng-disabled="!wifiForm.$valid || offerNew.busy"
+                            ng-class="{disabled:!wifiForm.$valid || offerNew.busy}"
                             ng-click="offerNew.add()"
                             class="right waves-effect waves-light btn-large">
                         <i class="mdi-navigation-check left"></i>
@@ -64,6 +71,7 @@
                     </button>
                 </div>
             </form>
+
         </div>
     </div>
 </div>
