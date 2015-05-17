@@ -1,0 +1,77 @@
+<div class="container">
+    <div class="row">
+        <div class="col s12">
+            <form role="form" name="wifiForm">
+                <div class="input-field">
+                    <i class="mdi-device-network-wifi prefix"></i>
+                    <input type="text"
+                           name="name"
+                           id="wifiname"
+                           ng-class="{invalid:wifiForm.name.$invalid}"
+                           required="required"
+                           ng-model="offerNew.offer.wifiName">
+
+                    <label for="wifiname">WIFI name</label>
+                </div>
+                <div class="file-field input-field">
+                    <input class="file-path validate" type="text"
+                           ng-class="{invalid:wifiForm.image.$invalid}"
+                           disabled
+                           ng-model="offerNew.img.file.name"/>
+
+                    <div class="btn">
+                        <span>File</span>
+                        <input type="file"
+                               name="image"
+                               valid-file
+                               change-file="offerNew.fileChange(event)"
+                               required="required"
+                               accept="image/png"
+                               ng-model="offerNew.img.file"/>
+                    </div>
+                </div>
+
+                <div class="input-field">
+                    <img ng-show="offerNew.img.preview" ng-src="{{offerNew.img.preview}}"/>
+                </div>
+
+                <div class="input-field">
+                    <i class="mdi-action-subject prefix"></i>
+                    <textarea id="message"
+                              class="validate materialize-textarea"
+                              name="description"
+                              ng-class="{invalid:wifiForm.description.$invalid}"
+                              ng-model="offerNew.offer.description"
+                              length="140">
+
+                    </textarea>
+                    <label for="message">Description</label>
+                </div>
+                <div class="input-field">
+                    <div ng-show="offerNew.busy" class="progress">
+                        <div class="indeterminate"></div>
+                    </div>
+                </div>
+                <div class="input-field">
+                    <a
+                            ng-link="main:offersList"
+                            ng-disabled="offerNew.busy"
+                            ng-class="{disabled:offerNew.busy}"
+                            class="left waves-effect waves-light btn-large">
+                        <i class="mdi-navigation-arrow-back left"></i>
+                        Cancel
+                    </a>
+                    <button
+                            ng-disabled="!wifiForm.$valid || offerNew.busy"
+                            ng-class="{disabled:!wifiForm.$valid || offerNew.busy}"
+                            ng-click="offerNew.add()"
+                            class="right waves-effect waves-light btn-large">
+                        <i class="mdi-navigation-check left"></i>
+                        Add
+                    </button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
