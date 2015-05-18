@@ -32,6 +32,7 @@ class OfferNew extends Controller
       @img.preview = null
       #      @todo: redirect?
       @$router.parent.navigate('/')
+      @ToastService.toast 'Offer created'
     )
     .finally(=>
       @busy = false

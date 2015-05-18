@@ -1,5 +1,5 @@
 class OfferEdit extends Controller
-  constructor: (@$rootScope, @$http, @$routeParams, @$router)->
+  constructor: (@$rootScope, @$http, @$routeParams, @$router,@ToastService)->
     @offer =
       wifiName: ''
       description: ''
@@ -28,6 +28,7 @@ class OfferEdit extends Controller
     .success((data, status, headers, config) =>
       #      @todo: redirect?
       @$router.parent.navigate('/')
+      @ToastService.toast 'Offer changed'
     )
     .finally(=> @busy = false)
 
@@ -37,6 +38,7 @@ class OfferEdit extends Controller
     .success((data, status, headers, config) =>
       #      @todo: redirect?
       @$router.parent.navigate('/')
+      @ToastService.toast 'Offer deleted'
     )
     .finally(=> @busy = false)
 

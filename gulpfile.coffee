@@ -26,6 +26,9 @@ gulp.task 'scripts', ->
     controller:
       format: 'upperCamelCase'
       suffix: 'Controller'
+    service:
+      format: 'upperCamelCase'
+      suffix: 'Service'
   )
   .pipe coffee()
   .pipe concat('app.min.js')
