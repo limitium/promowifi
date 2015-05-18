@@ -11,15 +11,6 @@ class OfferEdit extends Controller
 
     @busy = true
 
-    @$http.get('/api/offers/' + @$routeParams.id)
-    .success((offer) =>
-      @offer.wifiName = offer.wifi_name
-      @offer.description = offer.description
-      @img.preview = '/cdn/' + offer._image.hash + '.png'
-    )
-    .finally(=> @busy = false)
-
-
   fileChange: (event) =>
     @img.file = event.target.files?[0]
 
@@ -39,3 +30,15 @@ class OfferEdit extends Controller
       @$router.parent.navigate('/')
     )
     .finally(=> @busy = false)
+
+OfferEdit::activate = ->
+  @$http.get('/api/offers/' + @$routeParams.id)
+  .success((offer) =>
+    @offer.wifiName = offer.wifi_name
+    @offer.description = offer.description
+    @img.preview = '/cdn/' + offer._image.hash + '.png'
+  )
+  .finally(=> @busy = false)
+
+OfferEdit::canDeactivate = ->
+  !@busy

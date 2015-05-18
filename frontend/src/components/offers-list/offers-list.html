@@ -6,6 +6,11 @@
 
 <div class="container">
     <div class="row">
+        <div ng-show="offersList.busy" class="progress">
+            <div class="indeterminate"></div>
+        </div>
+    </div>
+    <div class="row">
         <div ng-repeat="offer in offersList.offers | orderBy:'-created_at'">
             <div class="col l6 m12">
                 <div class="card large">
@@ -18,7 +23,8 @@
                             </span>
 
                         <p class="grey-text text-darken-1">
-                            <span am-time-ago="offer.created_at"></span> <span>&#9900;</span> <span ng-bind="offer._lookups.length"></span> views
+                            <span am-time-ago="offer.created_at"></span> <span>&#9900;</span> <span
+                                ng-bind="offer._lookups.length"></span> views
                         </p>
                     </div>
                     <div class="card-reveal">
@@ -27,7 +33,9 @@
                             </span>
 
                         <div class="grey-text text-darken-1">
-                            <a ng-link="main:offerEdit({id:offer.id})"><i class="mdi-content-create"></i> edit</a>
+                            <p><a ng-link="main:offerEdit({id:offer.id})"><i class="mdi-content-create"></i> edit</a>
+                            </p>
+
                             <p class="flow-text" ng-bind="offer.description"></p>
                         </div>
                     </div>

@@ -30,9 +30,12 @@ class OfferNew extends Controller
       @offer.description = ''
       @img.file = null
       @img.preview = null
-#      @todo: redirect?
+      #      @todo: redirect?
       @$router.parent.navigate('/')
     )
     .finally(=>
       @busy = false
     )
+
+OfferNew::canDeactivate = ->
+  !@busy
