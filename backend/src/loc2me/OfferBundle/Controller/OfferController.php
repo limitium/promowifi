@@ -99,6 +99,20 @@ class OfferController extends Controller
         return $this->processForm($form, $request, $offer);
     }
 
+    /**
+     * @Rest\View(statusCode=204)
+     * @param Offer $offer
+     * @return Offer
+     */
+    public function deleteOfferAction(Offer $offer)
+    {
+        $this->deleteImage($offer->getImage());
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($offer);
+        $em->flush();
+        return $offer;
+    }
+
     private function processForm(Form $form, Request $request, Offer $offer)
     {
 
@@ -147,7 +161,6 @@ class OfferController extends Controller
         }
     }
 
-
     private function upload($imgDataUrl)
     {
         list($type, $data) = explode(';', $imgDataUrl);
@@ -175,6 +188,8 @@ class OfferController extends Controller
 
     private function deleteImage(Image $image)
     {
-        unlink($this->getImageName($image->getHash()));
+        if ($image) {
+            unlink($this->getImageName($image->getHash()));
+        }
     }
 }

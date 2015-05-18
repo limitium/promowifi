@@ -31,6 +31,15 @@ class OfferEdit extends Controller
     )
     .finally(=> @busy = false)
 
+  delete: =>
+    @busy = true
+    @$http.delete('/api/offers/' + @$routeParams.id)
+    .success((data, status, headers, config) =>
+      #      @todo: redirect?
+      @$router.parent.navigate('/')
+    )
+    .finally(=> @busy = false)
+
 OfferEdit::activate = ->
   @$http.get('/api/offers/' + @$routeParams.id)
   .success((offer) =>

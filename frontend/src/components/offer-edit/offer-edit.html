@@ -1,6 +1,16 @@
 <div class="container">
     <div class="row">
         <div class="col s12">
+            <div class="right">
+                <button
+                        ng-disabled="offerEdit.busy"
+                        ng-class="{disabled:offerEdit.busy}"
+                        ng-click="offerEdit.delete()"
+                        class="waves-effect waves-light btn-large red">
+                    <i class="mdi-action-delete left"></i>
+                    Delete
+                </button>
+            </div>
             <form role="form" name="wifiForm">
                 <div class="input-field">
                     <i class="mdi-device-network-wifi prefix"></i>
@@ -56,7 +66,7 @@
                             ng-link="main:offersList"
                             ng-disabled="offerEdit.busy"
                             ng-class="{disabled:offerEdit.busy}"
-                            class="left waves-effect waves-light btn-large">
+                            class="waves-effect waves-light btn-large">
                         <i class="mdi-navigation-arrow-back left"></i>
                         Cancel
                     </a>
