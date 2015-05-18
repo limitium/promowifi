@@ -1,0 +1,8 @@
+loc2me\OfferBundle\Entity\User:
+    type:  entity
+    table: user
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO

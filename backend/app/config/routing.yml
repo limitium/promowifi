@@ -2,3 +2,5 @@ _main:
     resource: routing_rest.yml
     prefix: /api
 
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
