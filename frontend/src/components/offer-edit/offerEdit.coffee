@@ -1,5 +1,5 @@
 class OfferEdit extends Controller
-  constructor: (@$rootScope, @$http, @$routeParams)->
+  constructor: (@$rootScope, @$http, @$routeParams, @$router)->
     @offer =
       wifiName: ''
       description: ''
@@ -10,7 +10,7 @@ class OfferEdit extends Controller
       preview: null
 
     @busy = true
-    console.log 1
+
     @$http.get('/api/offers/' + @$routeParams.id)
     .success((offer) =>
       @offer.wifiName = offer.wifi_name
@@ -35,5 +35,7 @@ class OfferEdit extends Controller
     @busy = true
     @$http.put('/api/offers/' + @$routeParams.id, @offer)
     .success((data, status, headers, config) =>
+      #      @todo: redirect?
+      @$router.parent.navigate('/')
     )
     .finally(=> @busy = false)

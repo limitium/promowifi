@@ -1,5 +1,5 @@
 class OfferNew extends Controller
-  constructor: (@$rootScope, @$http)->
+  constructor: (@$rootScope, @$http, @$router)->
     @offer =
       wifiName: ''
       description: ''
@@ -30,6 +30,8 @@ class OfferNew extends Controller
       @offer.description = ''
       @img.file = null
       @img.preview = null
+#      @todo: redirect?
+      @$router.parent.navigate('/')
     )
     .finally(=>
       @busy = false
