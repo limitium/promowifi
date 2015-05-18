@@ -33,11 +33,7 @@ class OfferEdit extends Controller
 
   edit: =>
     @busy = true
-    @$http.put('/api/offers', @offer)
+    @$http.put('/api/offers/' + @$routeParams.id, @offer)
     .success((data, status, headers, config) =>
-      @offer.wifiName = ''
-      @offer.description = ''
-      @img.file = null
-      @img.preview = null
     )
     .finally(=> @busy = false)

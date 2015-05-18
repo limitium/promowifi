@@ -16,6 +16,7 @@ use loc2me\OfferBundle\Form\OfferType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Form\Form;
 
 class OfferController extends Controller
 {
@@ -81,32 +82,47 @@ class OfferController extends Controller
      */
     public function postOffersAction(Request $request)
     {
-        return $this->processForm($request, new Offer());
+        $offer = new Offer();
+        $form = $this->createForm(new OfferType(), $offer);
+        return $this->processForm($form, $request, $offer);
     }
 
-    private function processForm(Request $request, Offer $offer)
+    /**
+     * @Rest\View
+     * @param Offer $offer
+     * @param Request $request
+     * @return View|Response
+     */
+    public function putOffersAction(Offer $offer, Request $request)
     {
+        $form = $this->createForm(new OfferType(), $offer, ['method' => 'PUT']);
+        return $this->processForm($form, $request, $offer);
+    }
 
-        $form = $this->createForm(new OfferType(), $offer);
+    private function processForm(Form $form, Request $request, Offer $offer)
+    {
 
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $this->uploadImage($offer);
 
+            $statusCode = $offer->getId() ? 204 : 201;
             $em = $this->getDoctrine()->getManager();
             $em->persist($offer);
             $em->flush();
 
             $response = new Response();
-            $response->setStatusCode(201);
+            $response->setStatusCode($statusCode);
 
-            $response->headers->set('Location',
-                $this->generateUrl(
-                    'get_offer', array('offer' => $offer->getId()),
-                    true // absolute
-                )
-            );
+            if ($statusCode == 201) {
+                $response->headers->set('Location',
+                    $this->generateUrl(
+                        'get_offer', array('offer' => $offer->getId()),
+                        true // absolute
+                    )
+                );
+            }
 
             return $response;
         }
