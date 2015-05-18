@@ -1,5 +1,5 @@
 class OfferEdit extends Controller
-  constructor: (@$rootScope, @$http)->
+  constructor: (@$rootScope, @$http, @$routeParams)->
     @offer =
       wifiName: ''
       description: ''
@@ -9,7 +9,16 @@ class OfferEdit extends Controller
       file: null
       preview: null
 
-    @busy = false
+    @busy = true
+    console.log 1
+    @$http.get('/api/offers/' + @$routeParams.id)
+    .success((offer) =>
+      @offer.wifiName = offer.wifi_name
+      @offer.description = offer.description
+      @img.preview = '/cdn/' + offer._image.hash + '.png'
+    )
+    .finally(=> @busy = false)
+
 
   fileChange: (event) =>
     @img.file = event.target.files?[0]
@@ -22,15 +31,13 @@ class OfferEdit extends Controller
 
     reader.readAsDataURL(@img.file)
 
-  add: =>
+  edit: =>
     @busy = true
-    @$http.post('/api/offers', @offer)
+    @$http.put('/api/offers', @offer)
     .success((data, status, headers, config) =>
       @offer.wifiName = ''
       @offer.description = ''
       @img.file = null
       @img.preview = null
     )
-    .finally(=>
-      @busy = false
-    )
+    .finally(=> @busy = false)

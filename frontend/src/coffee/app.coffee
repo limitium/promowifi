@@ -11,6 +11,10 @@ class Main extends Controller
       path: '/offer/new'
       components:
         main: 'offerNew'
+    ,
+      path: '/offer/edit/:id'
+      components:
+        main: 'offerEdit'
     ]
 
 

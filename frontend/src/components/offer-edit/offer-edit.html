@@ -9,7 +9,7 @@
                            id="wifiname"
                            ng-class="{invalid:wifiForm.name.$invalid}"
                            required="required"
-                           ng-model="offerNew.offer.wifiName">
+                           ng-model="offerEdit.offer.wifiName">
 
                     <label for="wifiname">WIFI name</label>
                 </div>
@@ -17,22 +17,21 @@
                     <input class="file-path validate" type="text"
                            ng-class="{invalid:wifiForm.image.$invalid}"
                            disabled
-                           ng-model="offerNew.img.file.name"/>
+                           ng-model="offerEdit.img.file.name"/>
 
                     <div class="btn">
                         <span>File</span>
                         <input type="file"
                                name="image"
                                valid-file
-                               change-file="offerNew.fileChange(event)"
-                               required="required"
+                               change-file="offerEdit.fileChange(event)"
                                accept="image/png"
-                               ng-model="offerNew.img.file"/>
+                               ng-model="offerEdit.img.file"/>
                     </div>
                 </div>
 
                 <div class="input-field">
-                    <img ng-show="offerNew.img.preview" ng-src="{{offerNew.img.preview}}"/>
+                    <img ng-show="offerEdit.img.preview" ng-src="{{offerEdit.img.preview}}"/>
                 </div>
 
                 <div class="input-field">
@@ -41,33 +40,33 @@
                               class="validate materialize-textarea"
                               name="description"
                               ng-class="{invalid:wifiForm.description.$invalid}"
-                              ng-model="offerNew.offer.description"
+                              ng-model="offerEdit.offer.description"
                               length="140">
 
                     </textarea>
                     <label for="message">Description</label>
                 </div>
                 <div class="input-field">
-                    <div ng-show="offerNew.busy" class="progress">
+                    <div ng-show="offerEdit.busy" class="progress">
                         <div class="indeterminate"></div>
                     </div>
                 </div>
                 <div class="input-field">
                     <a
                             ng-link="main:offersList"
-                            ng-disabled="offerNew.busy"
-                            ng-class="{disabled:offerNew.busy}"
+                            ng-disabled="offerEdit.busy"
+                            ng-class="{disabled:offerEdit.busy}"
                             class="left waves-effect waves-light btn-large">
                         <i class="mdi-navigation-arrow-back left"></i>
                         Cancel
                     </a>
                     <button
-                            ng-disabled="!wifiForm.$valid || offerNew.busy"
-                            ng-class="{disabled:!wifiForm.$valid || offerNew.busy}"
-                            ng-click="offerNew.add()"
+                            ng-disabled="!wifiForm.$valid || offerEdit.busy"
+                            ng-class="{disabled:!wifiForm.$valid || offerEdit.busy}"
+                            ng-click="offerEdit.edit()"
                             class="right waves-effect waves-light btn-large">
                         <i class="mdi-navigation-check left"></i>
-                        Add
+                        Save
                     </button>
                 </div>
             </form>
