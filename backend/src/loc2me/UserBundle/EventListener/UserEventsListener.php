@@ -9,17 +9,20 @@ use Doctrine\ORM\EntityManager;
 use FOS\UserBundle\Event\FilterUserResponseEvent;
 use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\FOSUserEvents;
+use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 class UserEventsListener implements EventSubscriberInterface
 {
+    private $router;
     private $em;
     private $session;
 
-    public function __construct(EntityManager $em, Session $session)
+    public function __construct(Router $router,EntityManager $em, Session $session)
     {
+        $this->router = $router;
         $this->em = $em;
         $this->session = $session;
     }
@@ -29,7 +32,7 @@ class UserEventsListener implements EventSubscriberInterface
         return array(
 //            FOSUserEvents::REGISTRATION_SUCCESS => [['setRegisterTime', 20]],
 //            FOSUserEvents::REGISTRATION_COMPLETED => [['setOverlordAndSettings', 20]],
-            FOSUserEvents::REGISTRATION_CONFIRMED => 'onRegistrationConfirmed',
+            FOSUserEvents::REGISTRATION_COMPLETED => 'onRegistrationConfirmed',
         );
     }
 
@@ -46,11 +49,11 @@ class UserEventsListener implements EventSubscriberInterface
         $user = $event->getUser();
     }
 
-    public function onRegistrationConfirmed(GetResponseUserEvent $event)
+    public function onRegistrationConfirmed(FilterUserResponseEvent $event)
     {
-        $url = $this->router->generate('@_welcome');
+        $url = $this->router->generate('_welcome');
 
-        $event->setResponse(new RedirectResponse($url));
+        $event->getResponse()->setTargetUrl($url);
     }
 
 }
