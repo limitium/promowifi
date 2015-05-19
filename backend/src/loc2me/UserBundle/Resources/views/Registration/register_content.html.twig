@@ -1,7 +1,7 @@
 {% trans_default_domain 'FOSUserBundle' %}
 <h4>Registration</h4>
 <div>
-    <a class="right waves-effect waves-light btn-large" href="{{ path("fos_user_registration_register") }}">
+    <a class="right waves-effect waves-teal btn-flat" href="{{ path("fos_user_security_login") }}">
         <i class="mdi-action-assignment-ind left"></i>
         {{ 'security.login.submit'|trans }}</a>
 </div>
@@ -35,7 +35,7 @@
     </div>
 
     <div class="row">
-        <button class="waves-effect waves-light btn-large">
+        <button class="right waves-effect waves-light btn-large">
             <i class="mdi-action-done left"></i>
             {{ 'registration.submit'|trans }}</button>
     </div>

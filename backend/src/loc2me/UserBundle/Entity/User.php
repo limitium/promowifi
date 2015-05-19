@@ -1,6 +1,6 @@
 <?php
 
-namespace loc2me\OfferBundle\Entity;
+namespace loc2me\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;

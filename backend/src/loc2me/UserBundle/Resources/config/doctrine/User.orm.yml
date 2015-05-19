@@ -1,6 +1,6 @@
-loc2me\OfferBundle\Entity\User:
+loc2me\UserBundle\Entity\User:
     type:  entity
-    table: user
+    table: User
     id:
         id:
             type: integer
