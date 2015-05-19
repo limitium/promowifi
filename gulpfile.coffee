@@ -70,7 +70,11 @@ gulp.task 'styles', ->
   .pipe(reload({stream: true}))
 
 gulp.task 'html', ->
-  gulp.src('./frontend/src/**/*html')
+  gulp.src(['./frontend/src/app.html'])
+  .pipe concat('index.html.twig')
+  .pipe(gulp.dest(buildFolder+'/../src/loc2me/OfferBundle/Resources/views/Layout'))
+
+  gulp.src(['./frontend/src/**/*html','!./frontend/src/app.html'])
   .pipe(gulp.dest(buildFolder+''))
   .pipe(reload({stream: true}))
 

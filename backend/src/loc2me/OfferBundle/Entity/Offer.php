@@ -3,6 +3,8 @@
 namespace loc2me\OfferBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use loc2me\UserBundle\Entity\User;
 
 /**
  * Offer
@@ -247,5 +249,34 @@ class Offer
     public function getLookups()
     {
         return $this->Lookups;
+    }
+
+    /**
+     * @var \loc2me\UserBundle\Entity\User
+     */
+    private $User;
+
+
+    /**
+     * Set User
+     *
+     * @param \loc2me\UserBundle\Entity\User $user
+     * @return Offer
+     */
+    public function setUser(\loc2me\UserBundle\Entity\User $user = null)
+    {
+        $this->User = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get User
+     *
+     * @return \loc2me\UserBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->User;
     }
 }

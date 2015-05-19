@@ -14,6 +14,7 @@ loc2me\OfferBundle\Entity\Offer:
             nullable: true
         created_at:
             type: datetime
+            nullable: false
             gedmo:
                 timestampable:
                     on: create
@@ -32,3 +33,10 @@ loc2me\OfferBundle\Entity\Offer:
         Lookups:
             targetEntity: OfferLookup
             mappedBy: Offers
+    manyToOne:
+        User:
+            targetEntity: loc2me\UserBundle\Entity\User
+            inversedBy: Offers
+            joinColumn:
+                name: user_id
+                referencedColumnName: id

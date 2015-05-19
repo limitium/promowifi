@@ -2,5 +2,9 @@ _main:
     resource: routing_rest.yml
     prefix: /api
 
+_welcome:
+    pattern:  /
+    defaults: { _controller: loc2meOfferBundle:Layout:index }
+
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"

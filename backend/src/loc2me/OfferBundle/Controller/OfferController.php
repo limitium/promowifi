@@ -62,7 +62,7 @@ class OfferController extends Controller
 
         return $em
             ->getRepository('loc2meOfferBundle:Offer')
-            ->findAll();
+            ->findBy(['User'=>$this->getUser()]);
     }
 
     /**
@@ -83,6 +83,7 @@ class OfferController extends Controller
     public function postOffersAction(Request $request)
     {
         $offer = new Offer();
+        $offer->setUser($this->getUser());
         $form = $this->createForm(new OfferType(), $offer);
         return $this->processForm($form, $request, $offer);
     }

@@ -6,3 +6,18 @@ loc2me\UserBundle\Entity\User:
             type: integer
             generator:
                 strategy: AUTO
+    fields:
+        created_at:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: create
+        updated_at:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: update
+    oneToMany:
+        Offers:
+            targetEntity: loc2me\OfferBundle\Entity\Offer
+            mappedBy: User

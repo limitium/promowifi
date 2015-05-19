@@ -5,11 +5,12 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="brigadier.user.registration.form.type"
+        <service id="loc2me.user.registration.form.type"
                  class="loc2me\UserBundle\Form\RegistrationFormType">
-            <tag name="form.type" alias="bs_user_registration" />
+            <tag name="form.type" alias="l2m_user_registration" />
             <argument>%fos_user.model.user.class%</argument>
         </service>
+
 
         <service id="brigadier.user.events.listner" class= "loc2me\UserBundle\EventListener\UserEventsListener">
             <tag name="kernel.event_subscriber" />
