@@ -1,0 +1,43 @@
+{% trans_default_domain 'FOSUserBundle' %}
+<h4>Registration</h4>
+<div>
+    <a class="right waves-effect waves-light btn-large" href="{{ path("fos_user_registration_register") }}">
+        <i class="mdi-action-assignment-ind left"></i>
+        {{ 'security.login.submit'|trans }}</a>
+</div>
+
+{% if form.vars.errors|length >0 %}
+    <p class="flow-text red-text">{{ form_errors(form) }}</p>
+{% endif %}
+
+<form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST">
+    {{ form_widget(form._token) }}
+
+    <div class="row {% if form.username.vars.errors|length >0 %}error{% endif %}">
+        {{ form_widget(form.username, { 'attr': {'placeholder':'auth.username'|trans} }) }}
+        {% if form.username.vars.errors|length >0 %}
+            <span class="error-info">{{ form_errors(form.username) }}</span>
+        {% endif %}
+    </div>
+
+    <div class="row {% if form.email.vars.errors|length >0 %}error{% endif %}">
+        {{ form_widget(form.email, { 'attr': {'placeholder':'auth.email'|trans} })}}
+        {% if form.email.vars.errors|length >0 %}
+            <span class="error-info">{{ form_errors(form.email) }}</span>
+        {% endif %}
+    </div>
+
+    <div class="row {% if form.plainPassword.vars.errors|length >0 %}error{% endif %}">
+        {{ form_widget(form.plainPassword, { 'attr': {'placeholder':'auth.password'|trans} })}}
+        {% if form.plainPassword.vars.errors|length >0 %}
+            <span class="error-info">{{ form_errors(form.plainPassword) }}</span>
+        {% endif %}
+    </div>
+
+    <div class="row">
+        <button class="waves-effect waves-light btn-large">
+            <i class="mdi-action-done left"></i>
+            {{ 'registration.submit'|trans }}</button>
+    </div>
+
+</form>

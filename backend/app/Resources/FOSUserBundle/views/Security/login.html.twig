@@ -1,0 +1,44 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+    <h4>Login</h4>
+    <div>
+        <a class="right waves-effect waves-light btn-large" href="{{ path("fos_user_registration_register") }}">
+            <i class="mdi-action-assignment-ind left"></i>
+            {{ 'registration.submit'|trans }}</a>
+    </div>
+
+    <form action="{{ path("fos_user_security_check") }}" method="post">
+        {% if error %}
+            <p class="flow-text red-text">{{ error.messageKey|trans(error.messageData, 'security') }}</p>
+        {% endif %}
+
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
+
+        <div class="input-field">
+            <i class="mdi-action-account-circle prefix"></i>
+            <input type="text" id="username" name="_username" value="{{ last_username }}" required="required"/>
+            <label for="username">{{ 'security.login.username'|trans }}</label>
+        </div>
+
+        <div class="input-field">
+            <i class="mdi-action-verified-user prefix"></i>
+            <input type="password" id="password" name="_password" required="required"/>
+            <label for="password">{{ 'security.login.password'|trans }}</label>
+        </div>
+
+        <div class="input-field">
+            <input type="checkbox" id="remember_me" name="_remember_me" value="on"/>
+            <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
+        </div>
+
+        <div class="input-field">
+            <button class="waves-effect waves-light btn-large">
+                <i class="mdi-action-done left"></i>
+                {{ 'security.login.submit'|trans }}</button>
+        </div>
+
+    </form>
+{% endblock fos_user_content %}
