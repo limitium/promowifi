@@ -57,10 +57,16 @@ namespace :deploy do
     end
   end
 
+  after :copy_config, :copy_config_param do
+    on roles(:web) do
+      upload! "./backend/app/config/parameters.yml", "#{release_path}/backend/app/config/parameters.yml.dist"
+    end
+  end
+
   after :updated, :composer_install do
     on roles(:web) do
       execute "curl -sS https://getcomposer.org/installer | php -- --install-dir=#{release_path}/backend"
-      execute "cd #{release_path}/backend;php #{release_path}/backend/composer.phar install --prefer-dist --no-dev --optimize-autoloader"
+      execute "cd #{release_path}/backend;php #{release_path}/backend/composer.phar update;export SYMFONY_ENV=prod; php #{release_path}/backend/composer.phar install --prefer-dist --no-dev --optimize-autoloader"
     end
   end
 
@@ -72,9 +78,9 @@ namespace :deploy do
 
   after :updated, :clear_cache do
     on roles(:web) do
-      execute "php #{release_path}/backend/app/console doctrine:cache:clear-metadata"
-      execute "php #{release_path}/backend/app/console doctrine:cache:clear-query"
-      execute "php #{release_path}/backend/app/console doctrine:cache:clear-result"
+#      execute "php #{release_path}/backend/app/console doctrine:cache:clear-metadata"
+#      execute "php #{release_path}/backend/app/console doctrine:cache:clear-query"
+#      execute "php #{release_path}/backend/app/console doctrine:cache:clear-result"
       execute "php #{release_path}/backend/app/console cache:clear --env=prod --no-debug"
     end
   end
