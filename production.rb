@@ -26,7 +26,7 @@ set :pty, true
 # set :linked_files, %w{config/database.yml}
 
 # Default value for linked_dirs is []
-set :linked_dirs, %w{backend/web/cnd}
+set :linked_dirs, %w{backend/web/cdn}
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
@@ -91,11 +91,10 @@ namespace :deploy do
     end
   end
 
-
-
   after :clear_cache, :change_www_owner do
     on roles(:web) do
       execute "sudo /bin/chmod -R o+rw #{release_path}/backend/app/cache"
+      execute "sudo /bin/chmod -R o+rw #{release_path}/backend/app/logs"
     end
   end
 
