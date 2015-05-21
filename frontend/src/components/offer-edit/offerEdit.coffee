@@ -47,7 +47,7 @@ OfferEdit::activate = ->
   .success((offer) =>
     @offer.wifiName = offer.wifi_name
     @offer.description = offer.description
-    @img.preview = '/cdn/' + offer._image.hash + '.png'
+    @img.preview = offer.image
   )
   .finally(=> @busy = false)
 

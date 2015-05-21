@@ -279,4 +279,8 @@ class Offer
     {
         return $this->User;
     }
+
+    public function getImageUrl(){
+        return $this->getImage()->__toString();
+    }
 }

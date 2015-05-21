@@ -1,0 +1,5 @@
+loc2me\OfferBundle\Entity\Lookup:
+    exclusion_policy: ALL
+    properties:
+        id:
+            expose: true

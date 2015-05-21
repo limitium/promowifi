@@ -1,0 +1,19 @@
+loc2me\OfferBundle\Entity\Offer:
+    exclusion_policy: ALL
+    properties:
+        id:
+            expose: true
+        wifiName:
+            expose: true
+        description:
+            expose: true
+        created_at:
+            expose: true
+        updated_at:
+            expose: true
+        Lookups:
+            expose: true
+            groups : [List]
+    virtual_properties:
+            getImageUrl:
+                serialized_name: image

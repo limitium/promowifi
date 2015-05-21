@@ -5,7 +5,6 @@ namespace loc2me\OfferBundle\Controller;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Request\ParamFetcher;
 
-use FOS\RestBundle\Controller\Annotations\QueryParam;
 
 use FOS\RestBundle\View\View;
 use loc2me\OfferBundle\Entity\File;
@@ -54,7 +53,7 @@ class OfferController extends Controller
     }
 
     /**
-     * @Rest\View
+     * @Rest\View(serializerGroups={"Default","List"})
      */
     public function getOffersAction()
     {
@@ -66,7 +65,7 @@ class OfferController extends Controller
     }
 
     /**
-     * @Rest\View
+     * @Rest\View(serializerGroups={"Default","Edit"})
      * @param Offer $offer
      * @return Offer
      */
