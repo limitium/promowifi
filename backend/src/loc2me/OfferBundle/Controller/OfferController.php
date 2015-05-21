@@ -20,7 +20,7 @@ use Symfony\Component\Form\Form;
 class OfferController extends Controller
 {
     /**
-     * @Rest\View
+     * @Rest\View(serializerGroups={"Default"})
      * @Rest\QueryParam(name="name", nullable=false, requirements="\w+")
      *
      * @param ParamFetcher $params
