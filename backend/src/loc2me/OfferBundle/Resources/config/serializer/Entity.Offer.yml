@@ -13,7 +13,7 @@ loc2me\OfferBundle\Entity\Offer:
             expose: true
         Lookups:
             expose: true
-            groups : [List]
+            groups: [List]
     virtual_properties:
             getImageUrl:
                 serialized_name: image
