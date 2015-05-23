@@ -1,4 +1,5 @@
-PromoWIFI
+PromoWIFI 
 =========
 
-Demo: http://promowifi.herokuapp.com/
+Web service for promos
+http://loc2me.cloudapp.net/
