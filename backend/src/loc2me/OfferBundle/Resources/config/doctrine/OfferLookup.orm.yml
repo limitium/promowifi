@@ -9,7 +9,7 @@ loc2me\OfferBundle\Entity\OfferLookup:
         wifiName:
             type: string
             nullable: false
-        created_at:
+        createdAt:
             type: datetime
             gedmo:
                 timestampable:

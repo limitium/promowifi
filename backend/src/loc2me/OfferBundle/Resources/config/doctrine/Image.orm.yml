@@ -17,3 +17,10 @@ loc2me\OfferBundle\Entity\Image:
                 joinColumns:
                     offer_id:
                         referencedColumnName: id
+    oneToOne:
+            Offer:
+                targetEntity: loc2me\OfferBundle\Entity\Offer
+                inversedBy: Avatar
+                joinColumns:
+                    offer_avatar_id:
+                        referencedColumnName: id

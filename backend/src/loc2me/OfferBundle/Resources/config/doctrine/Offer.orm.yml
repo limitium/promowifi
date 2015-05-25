@@ -9,22 +9,34 @@ loc2me\OfferBundle\Entity\Offer:
         wifiName:
             type: string
             nullable: false
+        name:
+            type: string
+            nullable: false
+        organizationName:
+            type: string
+            nullable: false
         description:
             type: text
             nullable: true
-        created_at:
+        createdAt:
             type: datetime
             nullable: false
             gedmo:
                 timestampable:
                     on: create
-        updated_at:
+        updatedAt:
             type: datetime
             gedmo:
                 timestampable:
                     on: update
     oneToOne:
             Image:
+                targetEntity: loc2me\OfferBundle\Entity\Image
+                mappedBy: Offer
+                cascade:
+                    - all
+    oneToOne:
+            Avatar:
                 targetEntity: loc2me\OfferBundle\Entity\Image
                 mappedBy: Offer
                 cascade:
