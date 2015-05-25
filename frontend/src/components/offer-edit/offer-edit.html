@@ -12,31 +12,79 @@
                 </button>
             </div>
             <form role="form" name="wifiForm">
+
+                <div class="input-field">
+                    <i class="mdi-action-store prefix"></i>
+                    <input type="text"
+                           name="organizationName"
+                           id="organizationName"
+                           ng-class="{invalid:wifiForm.organizationName.$invalid}"
+                           required="required"
+                           ng-model="offerEdit.offer.organizationName">
+                    <label  class="active" for="wifiname">Organization name</label>
+                </div>
+
+                <div class="file-field input-field">
+                    <input class="file-path validate" type="text"
+                           ng-class="{invalid:wifiForm.avatar.$invalid}"
+                           disabled
+                           ng-model="offerEdit.avatar.file.name"/>
+
+                    <div class="btn">
+                        <span><i class="mdi-action-account-circle"></i></span>
+                        <input type="file"
+                               name="avatar"
+                               valid-file
+                               change-file="offerEdit.avatarChange(event)"
+                               accept="image/png"
+                               ng-model="offerEdit.avatar.file"/>
+                    </div>
+                    <div class="input-field">
+                        <img ng-show="offerEdit.avatar.preview" ng-src="{{offerEdit.avatar.preview}}"/>
+                    </div>
+                </div>
+
                 <div class="input-field">
                     <i class="mdi-device-network-wifi prefix"></i>
                     <input type="text"
-                           name="name"
+                           name="wifiname"
                            id="wifiname"
-                           ng-class="{invalid:wifiForm.name.$invalid}"
+                           ng-class="{invalid:wifiForm.wifiname.$invalid}"
                            required="required"
                            ng-model="offerEdit.offer.wifiName">
 
                     <label class="active" for="wifiname">WIFI name</label>
                 </div>
+
+                <div class="input-field">
+                    <i class="mdi-action-spellcheck prefix"></i>
+                    <input type="text"
+                           name="name"
+                           id="name"
+                           ng-class="{invalid:wifiForm.name.$invalid}"
+                           required="required"
+                           ng-model="offerEdit.offer.name">
+
+                    <label class="active" for="name">Promo name</label>
+                </div>
+
                 <div class="file-field input-field">
                     <input class="file-path validate" type="text"
                            ng-class="{invalid:wifiForm.image.$invalid}"
                            disabled
-                           ng-model="offerEdit.img.file.name"/>
+                           ng-model="offerEdit.image.file.name"/>
 
                     <div class="btn">
-                        <span>File</span>
+                        <span><i class="mdi-action-wallet-giftcard"></i></span>
                         <input type="file"
                                name="image"
                                valid-file
-                               change-file="offerEdit.fileChange(event)"
+                               change-file="offerEdit.imageChange(event)"
                                accept="image/png"
-                               ng-model="offerEdit.img.file"/>
+                               ng-model="offerEdit.image.file"/>
+                    </div>
+                    <div class="input-field">
+                        <img ng-show="offerEdit.image.preview" ng-src="{{offerEdit.image.preview}}"/>
                     </div>
                 </div>
 
@@ -46,7 +94,7 @@
 
                 <div class="input-field">
                     <i class="mdi-action-subject prefix"></i>
-                    <textarea id="message"
+                    <textarea id="description"
                               class="validate materialize-textarea"
                               name="description"
                               ng-class="{invalid:wifiForm.description.$invalid}"
@@ -54,8 +102,9 @@
                               length="140">
 
                     </textarea>
-                    <label class="active" for="message">Description</label>
+                    <label class="active" for="description">Description</label>
                 </div>
+
                 <div class="input-field">
                     <div ng-show="offerEdit.busy" class="progress">
                         <div class="indeterminate"></div>

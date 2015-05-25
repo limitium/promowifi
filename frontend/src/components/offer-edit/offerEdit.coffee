@@ -1,32 +1,49 @@
 class OfferEdit extends Controller
   constructor: (@$rootScope, @$http, @$routeParams, @$router,@ToastService)->
     @offer =
+      organizationName: ''
       wifiName: ''
+      rawAvatar: null
+      name: ''
       description: ''
       rawImage: null
 
-    @img =
+    @image =
+      file: null
+      preview: null
+
+    @avatar =
       file: null
       preview: null
 
     @busy = true
 
-  fileChange: (event) =>
-    @img.file = event.target.files?[0]
+  imageChange: (event) =>
+    @image.file = event.target.files?[0]
 
     reader = new FileReader()
     reader.onload = =>
-      @img.preview = reader.result
-      @offer.rawImage = @img.preview
+      @image.preview = reader.result
+      @offer.rawImage = @image.preview
       @$rootScope.$apply()
 
-    reader.readAsDataURL(@img.file)
+    reader.readAsDataURL(@image.file)
+
+  avatarChange: (event) =>
+    @avatar.file = event.target.files?[0]
+
+    reader = new FileReader()
+    reader.onload = =>
+      @avatar.preview = reader.result
+      @offer.rawAvatar = @avatar.preview
+      @$rootScope.$apply()
+
+    reader.readAsDataURL(@avatar.file)
 
   edit: =>
     @busy = true
     @$http.put('/api/offers/' + @$routeParams.id, @offer)
     .success((data, status, headers, config) =>
-      #      @todo: redirect?
       @$router.parent.navigate('/')
       @ToastService.toast 'Offer changed'
     )
@@ -36,7 +53,6 @@ class OfferEdit extends Controller
     @busy = true
     @$http.delete('/api/offers/' + @$routeParams.id)
     .success((data, status, headers, config) =>
-      #      @todo: redirect?
       @$router.parent.navigate('/')
       @ToastService.toast 'Offer deleted'
     )
@@ -45,9 +61,13 @@ class OfferEdit extends Controller
 OfferEdit::activate = ->
   @$http.get('/api/offers/' + @$routeParams.id)
   .success((offer) =>
+    @offer.organizationName = offer.organization_name
     @offer.wifiName = offer.wifi_name
+    @image.preview = offer.image
+
+    @offer.name = offer.name
     @offer.description = offer.description
-    @img.preview = offer.image
+    @avatar.preview = offer.avatar
   )
   .finally(=> @busy = false)
 
