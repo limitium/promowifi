@@ -15,9 +15,12 @@ class OfferType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('wifiName')
-            ->add('rawImage')
+            ->add('name')
             ->add('description')
+            ->add('rawImage')
+            ->add('organizationName')
+            ->add('wifiName')
+            ->add('rawAvatar')
         ;
     }
     

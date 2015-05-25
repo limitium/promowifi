@@ -19,10 +19,6 @@ class OfferLookup
      */
     private $wifiName;
 
-    /**
-     * @var \DateTime
-     */
-    private $created_at;
 
     /**
      * Get id
@@ -57,28 +53,7 @@ class OfferLookup
         return $this->wifiName;
     }
 
-    /**
-     * Set created_at
-     *
-     * @param \DateTime $createdAt
-     * @return OfferLookup
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->created_at = $createdAt;
 
-        return $this;
-    }
-
-    /**
-     * Get created_at
-     *
-     * @return \DateTime 
-     */
-    public function getCreatedAt()
-    {
-        return $this->created_at;
-    }
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
@@ -123,5 +98,34 @@ class OfferLookup
     public function getOffers()
     {
         return $this->Offers;
+    }
+    /**
+     * @var \DateTime
+     */
+    private $createdAt;
+
+
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     * @return OfferLookup
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
     }
 }

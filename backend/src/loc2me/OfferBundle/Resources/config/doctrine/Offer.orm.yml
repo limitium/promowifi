@@ -37,7 +37,7 @@ loc2me\OfferBundle\Entity\Offer:
                     - all
     oneToOne:
             Avatar:
-                targetEntity: loc2me\OfferBundle\Entity\Image
+                targetEntity: loc2me\OfferBundle\Entity\Avatar
                 mappedBy: Offer
                 cascade:
                     - all

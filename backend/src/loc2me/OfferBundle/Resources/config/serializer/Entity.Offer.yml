@@ -3,13 +3,17 @@ loc2me\OfferBundle\Entity\Offer:
     properties:
         id:
             expose: true
-        wifiName:
+        name:
             expose: true
         description:
             expose: true
-        created_at:
+        createdAt:
             expose: true
-        updated_at:
+        updatedAt:
+            expose: true
+        wifiName:
+            expose: true
+        organizationName:
             expose: true
         Lookups:
             expose: true
@@ -17,3 +21,5 @@ loc2me\OfferBundle\Entity\Offer:
     virtual_properties:
             getImageUrl:
                 serialized_name: image
+            getAvatarUrl:
+                serialized_name: avatar

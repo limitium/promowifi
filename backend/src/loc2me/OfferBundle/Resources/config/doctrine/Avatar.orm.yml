@@ -1,4 +1,4 @@
-loc2me\OfferBundle\Entity\Image:
+loc2me\OfferBundle\Entity\Avatar:
     type: entity
     fields:
         id:
@@ -13,7 +13,7 @@ loc2me\OfferBundle\Entity\Image:
     oneToOne:
             Offer:
                 targetEntity: loc2me\OfferBundle\Entity\Offer
-                inversedBy: Image
+                inversedBy: Avatar
                 joinColumns:
                     offer_id:
                         referencedColumnName: id

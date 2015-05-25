@@ -7,12 +7,12 @@ loc2me\UserBundle\Entity\User:
             generator:
                 strategy: AUTO
     fields:
-        created_at:
+        createdAt:
             type: datetime
             gedmo:
                 timestampable:
                     on: create
-        updated_at:
+        updatedAt:
             type: datetime
             gedmo:
                 timestampable:
