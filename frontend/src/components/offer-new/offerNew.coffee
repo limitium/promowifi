@@ -1,36 +1,59 @@
 class OfferNew extends Controller
-  constructor: (@$rootScope, @$http, @$router)->
+  constructor: (@$rootScope, @$http, @$router, @ToastService)->
     @offer =
+      organizationName: ''
       wifiName: ''
+      rawAvatar: null
+      name: ''
       description: ''
       rawImage: null
 
-    @img =
+    @image =
+      file: null
+      preview: null
+
+    @avatar =
       file: null
       preview: null
 
     @busy = false
 
-  fileChange: (event) =>
-    @img.file = event.target.files?[0]
+  imageChange: (event) =>
+    @image.file = event.target.files?[0]
 
     reader = new FileReader()
     reader.onload = =>
-      @img.preview = reader.result
-      @offer.rawImage = @img.preview
+      @image.preview = reader.result
+      @offer.rawImage = @image.preview
       @$rootScope.$apply()
 
-    reader.readAsDataURL(@img.file)
+    reader.readAsDataURL(@image.file)
+
+  avatarChange: (event) =>
+    @avatar.file = event.target.files?[0]
+
+    reader = new FileReader()
+    reader.onload = =>
+      @avatar.preview = reader.result
+      @offer.rawAvatar = @avatar.preview
+      @$rootScope.$apply()
+
+    reader.readAsDataURL(@avatar.file)
 
   add: =>
     @busy = true
     @$http.post('/api/offers', @offer)
     .success((data, status, headers, config) =>
+      @offer.organizationName = ''
       @offer.wifiName = ''
+      @avatar.file = null
+      @avatar.preview = null
+
+      @offer.name = ''
       @offer.description = ''
-      @img.file = null
-      @img.preview = null
-      #      @todo: redirect?
+      @image.file = null
+      @image.preview = null
+
       @$router.parent.navigate('/')
       @ToastService.toast 'Offer created'
     )

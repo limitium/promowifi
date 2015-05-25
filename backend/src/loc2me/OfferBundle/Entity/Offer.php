@@ -366,7 +366,11 @@ class Offer
 
     public function getAvatarUrl()
     {
-
+        $avatar = $this->getAvatar();
+        if(!$avatar){
+            return '';
+        }
+        return $avatar->__toString();
     }
 
 }

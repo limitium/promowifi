@@ -7,6 +7,7 @@ use FOS\RestBundle\Request\ParamFetcher;
 
 
 use FOS\RestBundle\View\View;
+use loc2me\OfferBundle\Entity\Avatar;
 use loc2me\OfferBundle\Entity\File;
 use loc2me\OfferBundle\Entity\Image;
 use loc2me\OfferBundle\Entity\Offer;
@@ -120,6 +121,7 @@ class OfferController extends Controller
 
         if ($form->isValid()) {
             $this->uploadImage($offer);
+            $this->uploadAvatar($offer);
 
             $statusCode = $offer->getId() ? 204 : 201;
             $em = $this->getDoctrine()->getManager();
@@ -161,6 +163,23 @@ class OfferController extends Controller
         }
     }
 
+    private function uploadAvatar(Offer $offer)
+    {
+        if ($offer->getRawAvatar()) {
+            $hash = $this->upload($offer->getRawAvatar());
+
+            $avatar = $offer->getAvatar();
+            if (!$avatar) {
+                $avatar = new Avatar();
+            } else {
+                $this->deleteImage($avatar);
+            }
+            $avatar->setHash($hash);
+            $avatar->setOffer($offer);
+            $offer->setAvatar($avatar);
+        }
+    }
+
     private function upload($imgDataUrl)
     {
         list($type, $data) = explode(';', $imgDataUrl);
@@ -186,7 +205,7 @@ class OfferController extends Controller
         return $fileName;
     }
 
-    private function deleteImage(Image $image)
+    private function deleteImage($image)
     {
         if ($image) {
             unlink($this->getImageName($image->getHash()));

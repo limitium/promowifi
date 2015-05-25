@@ -19,7 +19,7 @@
                     </div>
                     <div class="card-content">
                             <span class="card-title activator grey-text text-darken-4">
-                                <span ng-bind="offer.wifi_name"></span> <i class="mdi-navigation-more-vert right"></i>
+                               <span ng-bind="offer.organization_name"></span> @ <span ng-bind="offer.name"></span> <i class="mdi-navigation-more-vert right"></i>
                             </span>
 
                         <p class="grey-text text-darken-1">
@@ -35,7 +35,8 @@
                         <div class="grey-text text-darken-1">
                             <p><a ng-link="main:offerEdit({id:offer.id})"><i class="mdi-content-create"></i> edit</a>
                             </p>
-
+                            <i class="mdi-device-network-wifi"></i>
+                            <span ng-bind="offer.wifi_name"></span>
                             <p class="flow-text" ng-bind="offer.description"></p>
                         </div>
                     </div>
