@@ -15,9 +15,9 @@ loc2me\OfferBundle\Entity\Offer:
             expose: true
         organizationName:
             expose: true
-        Lookups:
-            expose: true
-            groups: [List]
+#        Lookups:
+#            expose: true
+#            groups: [List]
     virtual_properties:
             getImageUrl:
                 serialized_name: image
