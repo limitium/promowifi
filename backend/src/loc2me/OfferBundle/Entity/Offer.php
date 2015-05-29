@@ -367,10 +367,14 @@ class Offer
     public function getAvatarUrl()
     {
         $avatar = $this->getAvatar();
-        if(!$avatar){
+        if (!$avatar) {
             return '';
         }
         return $avatar->__toString();
     }
 
+    public function getViewsCount()
+    {
+        return $this->getLookups()->count();
+}
 }

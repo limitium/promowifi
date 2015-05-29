@@ -23,3 +23,5 @@ loc2me\OfferBundle\Entity\Offer:
                 serialized_name: image
             getAvatarUrl:
                 serialized_name: avatar
+            getViewsCount:
+                serialized_name: views
