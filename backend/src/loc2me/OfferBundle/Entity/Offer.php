@@ -377,4 +377,32 @@ class Offer
     {
         return $this->getLookups()->count();
 }
+    /**
+     * @var boolean
+     */
+    private $isDisposable;
+
+
+    /**
+     * Set isDisposable
+     *
+     * @param boolean $isDisposable
+     * @return Offer
+     */
+    public function setIsDisposable($isDisposable)
+    {
+        $this->isDisposable = $isDisposable;
+
+        return $this;
+    }
+
+    /**
+     * Get isDisposable
+     *
+     * @return boolean 
+     */
+    public function getIsDisposable()
+    {
+        return $this->isDisposable;
+    }
 }

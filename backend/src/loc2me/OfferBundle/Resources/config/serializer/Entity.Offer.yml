@@ -5,6 +5,8 @@ loc2me\OfferBundle\Entity\Offer:
             expose: true
         name:
             expose: true
+        isDisposable:
+            expose: true
         description:
             expose: true
         createdAt:

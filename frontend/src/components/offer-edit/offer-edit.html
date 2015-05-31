@@ -57,7 +57,7 @@
                 </div>
 
                 <div class="input-field">
-                    <i class="mdi-action-spellcheck prefix"></i>
+                    <i class="mdi-action-payment prefix"></i>
                     <input type="text"
                            name="name"
                            id="name"
@@ -66,6 +66,12 @@
                            ng-model="offerEdit.offer.name">
 
                     <label class="active" for="name">Promo name</label>
+                </div>
+
+                <div class="input-field">
+                    <i class="mdi-action-assignment-turned-in prefix"></i>
+                    <input type="checkbox" id="isDisposable" ng-model="offerEdit.offer.isDisposable"/>
+                    <label for="isDisposable">Is disposable</label>
                 </div>
 
                 <div class="file-field input-field">

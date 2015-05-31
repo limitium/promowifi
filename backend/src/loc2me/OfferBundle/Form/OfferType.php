@@ -17,6 +17,7 @@ class OfferType extends AbstractType
         $builder
             ->add('name')
             ->add('description')
+            ->add('isDisposable')
             ->add('rawImage')
             ->add('organizationName')
             ->add('wifiName')

@@ -18,6 +18,10 @@ loc2me\OfferBundle\Entity\Offer:
         description:
             type: text
             nullable: true
+        isDisposable:
+            type: boolean
+            nullable: false
+            default: false
         createdAt:
             type: datetime
             nullable: false

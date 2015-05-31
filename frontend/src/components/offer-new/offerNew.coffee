@@ -5,6 +5,7 @@ class OfferNew extends Controller
       wifiName: ''
       rawAvatar: null
       name: ''
+      isDisposable: false
       description: ''
       rawImage: null
 
@@ -50,6 +51,7 @@ class OfferNew extends Controller
       @avatar.preview = null
 
       @offer.name = ''
+      @offer.isDisposable = false
       @offer.description = ''
       @image.file = null
       @image.preview = null

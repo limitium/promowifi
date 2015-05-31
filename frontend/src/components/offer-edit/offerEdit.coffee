@@ -6,6 +6,7 @@ class OfferEdit extends Controller
       rawAvatar: null
       name: ''
       description: ''
+      isDisposable: false
       rawImage: null
 
     @image =
@@ -67,7 +68,9 @@ OfferEdit::activate = ->
 
     @offer.name = offer.name
     @offer.description = offer.description
+    @offer.isDisposable = offer.is_disposable
     @avatar.preview = offer.avatar
+    console.log offer,@offer
   )
   .finally(=> @busy = false)
 
