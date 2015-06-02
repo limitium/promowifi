@@ -23,6 +23,7 @@ class OfferController extends Controller
     /**
      * @Rest\View(serializerGroups={"Default"})
      * @Rest\QueryParam(name="name", nullable=false, requirements="\w+")
+     * @Rest\QueryParam(name="mac", nullable=false, requirements="([a-fA-F0-9]{2}[:|\-]?){6}")
      *
      * @param ParamFetcher $params
      * @return
@@ -38,7 +39,6 @@ class OfferController extends Controller
         $offerLookup = new OfferLookup();
         $offerLookup->setWifiName($wifiName);
         $offerLookup->setMac($mac);
-
 
         $offers = $em
             ->getRepository('loc2meOfferBundle:Offer')
