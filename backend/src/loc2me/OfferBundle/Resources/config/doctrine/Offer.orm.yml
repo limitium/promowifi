@@ -55,3 +55,9 @@ loc2me\OfferBundle\Entity\Offer:
             joinColumn:
                 name: user_id
                 referencedColumnName: id
+    oneToMany:
+            Usages:
+                targetEntity: loc2me\OfferBundle\Entity\Usage
+                mappedBy: Offer
+                cascade:
+                    - all

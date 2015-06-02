@@ -405,4 +405,42 @@ class Offer
     {
         return $this->isDisposable;
     }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $Usages;
+
+
+    /**
+     * Add Usages
+     *
+     * @param \loc2me\OfferBundle\Entity\Usage $usages
+     * @return Offer
+     */
+    public function addUsage(\loc2me\OfferBundle\Entity\Usage $usages)
+    {
+        $this->Usages[] = $usages;
+
+        return $this;
+    }
+
+    /**
+     * Remove Usages
+     *
+     * @param \loc2me\OfferBundle\Entity\Usage $usages
+     */
+    public function removeUsage(\loc2me\OfferBundle\Entity\Usage $usages)
+    {
+        $this->Usages->removeElement($usages);
+    }
+
+    /**
+     * Get Usages
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getUsages()
+    {
+        return $this->Usages;
+    }
 }

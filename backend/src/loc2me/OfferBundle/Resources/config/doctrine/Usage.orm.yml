@@ -1,0 +1,24 @@
+loc2me\OfferBundle\Entity\Usage:
+    type: entity
+    table: `Usage`
+    fields:
+        id:
+            id: true
+            type: integer
+            generator:
+                strategy: AUTO
+        mac:
+            type: string
+            nullable: false
+        createdAt:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: create
+    manyToOne:
+            Offer:
+                targetEntity: loc2me\OfferBundle\Entity\Offer
+                inversedBy: Usages
+                joinColumns:
+                    offer_id:
+                        referencedColumnName: id

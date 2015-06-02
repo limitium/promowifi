@@ -11,6 +11,7 @@ use loc2me\OfferBundle\Entity\Avatar;
 use loc2me\OfferBundle\Entity\File;
 use loc2me\OfferBundle\Entity\Image;
 use loc2me\OfferBundle\Entity\Offer;
+use loc2me\OfferBundle\Entity\Usage;
 use loc2me\OfferBundle\Entity\OfferLookup;
 use loc2me\OfferBundle\Form\OfferType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -20,6 +21,30 @@ use Symfony\Component\Form\Form;
 
 class OfferController extends Controller
 {
+    /**
+     * @Rest\View(statusCode=201)
+     * @Rest\RequestParam(name="mac", nullable=false, requirements="([a-fA-F0-9]{2}[:|\-]?){6}")
+     * @param ParamFetcher $params
+     * @param Offer $offer
+     * @return View|Response
+     * @internal param Request $request
+     */
+    public function postOfferUsagesAction(ParamFetcher $params, Offer $offer)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $mac = $params->get('mac', '');
+
+        $usage = new Usage();
+        $usage->setMac($mac);
+
+        $offer->addUsage($usage);
+        $usage->setOffer($offer);
+
+        $em->persist($usage);
+        $em->flush();
+    }
+
     /**
      * @Rest\View(serializerGroups={"Default"})
      * @Rest\QueryParam(name="name", nullable=false, requirements="\w+")
