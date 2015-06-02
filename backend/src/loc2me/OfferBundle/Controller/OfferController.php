@@ -33,9 +33,11 @@ class OfferController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $wifiName = $params->get('name', '');
+        $mac = $params->get('mac', '');
 
         $offerLookup = new OfferLookup();
         $offerLookup->setWifiName($wifiName);
+        $offerLookup->setMac($mac);
 
 
         $offers = $em
@@ -62,7 +64,7 @@ class OfferController extends Controller
 
         return $em
             ->getRepository('loc2meOfferBundle:Offer')
-            ->findBy(['User'=>$this->getUser()]);
+            ->findBy(['User' => $this->getUser()]);
     }
 
     /**
